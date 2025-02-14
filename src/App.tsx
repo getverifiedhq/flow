@@ -5,27 +5,7 @@ import { FormRoute } from "./routes";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeRoute />,
-  },
-  {
-    path: "/view",
-    element: <ViewRoute />,
-  },
-  {
-    path: "/:organizationId",
-    element: <HomeRoute />,
-  },
-  {
-    path: "/:organizationId/:id",
-    element: <MainRoute />,
-  },
-  {
-    path: "/:organizationId/:id/payment",
-    element: <PaymentRoute />,
-  },
-  {
-    path: "/:organizationId/:id/view",
-    element: <ViewRoute />,
+    element: <FormRoute />,
   },
 ]);
 
