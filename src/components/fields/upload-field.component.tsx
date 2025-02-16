@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { CameraAlt as Camera } from "@mui/icons-material";
-import { Button, Typography } from "@mui/material";
-import { fileToArrayBuffer, IUploadField, uploadArrayBuffer } from "../../core";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
 
 export function UploadFieldComponent(props: {
-  field: IUploadField;
+  field: IFileField;
   onChange: (url: string) => void;
 }) {
   const inputElementFile = useRef(null as HTMLInputElement | null);
@@ -25,16 +25,42 @@ export function UploadFieldComponent(props: {
     <>
       <Typography sx={{ mb: 1 }}>{props.field.title}</Typography>
 
-      <Button
-        disabled={state.isLoading}
-        fullWidth
-        onClick={() => inputElementFile.current?.click()}
-        sx={{ mb: 2 }}
-        variant="outlined"
+      <Box
+        onClick={() =>
+          state.isLoading ? null : inputElementFile.current?.click()
+        }
+        sx={{
+          alignItems: "center",
+          backgroundColor: "#f9f9f9",
+          border: "2px dashed rgba(18, 35, 69, .15)",
+          borderRadius: 2,
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          mb: 2,
+          px: 2,
+          py: 6,
+        }}
       >
-        <Camera />
-        &nbsp;Upload files
-      </Button>
+        <Box sx={{ mb: 2 }}>
+          <img height={36} src="/images/file-upload-icon.svg" />
+        </Box>
+        {props.field.description ? (
+          <Typography
+            color="black"
+            gutterBottom
+            textAlign="center"
+            variant="body1"
+          >
+            {props.field.description}
+          </Typography>
+        ) : null}
+
+        {/* <Typography gutterBottom textAlign="center" variant="body2">
+          Max file size: 10 MB
+        </Typography> */}
+      </Box>
 
       <input
         accept="image/*"

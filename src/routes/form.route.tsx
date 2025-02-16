@@ -2,7 +2,8 @@ import { FormComponent } from "../components/form.component";
 import { IForm } from "../core";
 
 const FORM: IForm = {
-  image: "https://secure.getverified.co.za/logo.png",
+  image:
+    "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
   sections: [
     {
       description: null,
@@ -17,9 +18,31 @@ const FORM: IForm = {
         {
           type: "text",
           name: "move_in_date",
-          title: "When yould you like to move-in?",
+          title: "When would you like to move-in?",
           isRequired: true,
           inputType: "date",
+        },
+        {
+          type: "text",
+          name: "move_out_date",
+          title: "When would you like to move-out?",
+          isRequired: false,
+          inputType: "date",
+        },
+        {
+          type: "dropdown",
+          name: "source",
+          title: "How did you find this property?",
+          isRequired: true,
+          choices: [
+            "Revo Property's Website",
+            "Facebook",
+            "Instagram",
+            "Property24",
+            "Private Property",
+            "DigsConnect",
+            "Word of Mouth",
+          ],
         },
       ],
       title: "Rental Information",
@@ -31,12 +54,14 @@ const FORM: IForm = {
           type: "text",
           name: "applicant_first_name",
           title: "First Name",
+          description: "Enter your first name as it appears on your ID.",
           isRequired: true,
         },
         {
           type: "text",
           name: "applicant_last_name",
           title: "Last Name",
+          description: "Enter your last name as it appears on your ID.",
           isRequired: true,
         },
         {
@@ -90,20 +115,14 @@ const FORM: IForm = {
           type: "file",
           name: "applicant_documents_identity_document",
           title: "Identity Document",
-          description: "Upload a photo of your identity document",
+          description:
+            "Please upload a photo of your identity document such as your South African Smart ID Card, Green ID Book or Passport.",
           isRequired: true,
           allowMultiple: false,
           acceptedTypes: "image/png",
           maxSize: 10_000,
           sourceType: "camera",
         },
-        // {
-        //   format: null,
-        //   name: "applicant_documents_identity_document",
-        //   required: true,
-        //   title: "Identity Document",
-        //   type: "upload",
-        // },
       ],
       title: "Identity Verification",
     },
@@ -134,13 +153,31 @@ const FORM: IForm = {
       ],
       title: "Employment Information",
     },
+    {
+      description: null,
+      fields: [
+        {
+          type: "file",
+          name: "applicant_documents_supporting_documents",
+          title: "Identity Document",
+          description:
+            "Please upload a photo of your identity document such as your South African Smart ID Card, Green ID Book or Passport.",
+          isRequired: true,
+          allowMultiple: false,
+          acceptedTypes: "image/png",
+          maxSize: 10_000,
+          sourceType: "camera",
+        },
+      ],
+      title: "Supporting Documents",
+    },
   ],
 };
 
 export function FormRoute() {
   return (
     <>
-      <FormComponent form={FORM} onSubmit={async () => {}} />
+      <FormComponent data={{}} form={FORM} onSubmit={async () => {}} />
     </>
   );
 }

@@ -4,12 +4,13 @@ import { IForm } from "../core";
 import { SectionComponent } from "./section.component";
 
 export function FormComponent(props: {
+  data: { [key: string]: string };
   form: IForm;
   onSubmit: (data: { [key: string]: string }) => Promise<void>;
 }) {
   const [state, setState] = useState({
     activeStep: 0,
-    data: {} as { [key: string]: string },
+    data: props.data,
   });
 
   useEffect(() => {}, [state]);
@@ -18,7 +19,7 @@ export function FormComponent(props: {
     <>
       <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>
         <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
-          <img height={24} src={props.form.image} />
+          <img height={40} src={props.form.image} />
         </Box>
 
         <Stepper activeStep={state.activeStep} orientation="vertical">
@@ -37,6 +38,7 @@ export function FormComponent(props: {
               </StepLabel>
               <StepContent>
                 <SectionComponent
+                  data={props.data}
                   onSubmit={async (x) =>
                     setState({
                       activeStep: state.activeStep + 1,

@@ -5,12 +5,13 @@ import { IField, ISection } from "../core";
 import { FieldComponent } from "./field.component";
 
 export function SectionComponent(props: {
+  data: { [key: string]: string };
   onSubmit: (data: { [key: string]: string }) => Promise<void>;
   section: ISection;
 }) {
   const formik = useFormik({
     initialValues: props.section.fields.reduce((dict, x) => {
-      dict[x.name] = "";
+      dict[x.name] = props.data[x.name] || "";
 
       return dict;
     }, {} as { [key: string]: string }),
@@ -19,6 +20,7 @@ export function SectionComponent(props: {
     },
     validationSchema: Yup.object().shape(
       props.section.fields.reduce((dict, x) => {
+        // TODO
         dict[x.name] = Yup.string().required();
 
         return dict;

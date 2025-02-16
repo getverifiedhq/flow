@@ -8,6 +8,12 @@ export type IBaseField = {
 export type IDropdownField = IBaseField & {
   type: "dropdown";
   choices: Array<string>;
+  choicesByUrl?: {
+    url: string;
+    path: string;
+    valueName: string;
+    titleName: string;
+  };
   choicesOrder?: "asc" | "desc";
   placeholder?: string;
 };
