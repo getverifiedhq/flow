@@ -1,74 +1,54 @@
-export type IAgreementField = {
+export type IBaseField = {
   name: string;
-
-  required: boolean;
-
-  text: string;
-
-  type: "agreement";
+  title: string;
+  description?: string;
+  isRequired: boolean;
 };
 
-export type IDropdown = {
-  name: string;
-
-  options: Array<any>;
-
-  placeholder: string | null;
-
-  required: boolean;
-
-  title: string;
-
+export type IDropdownField = IBaseField & {
   type: "dropdown";
+  choices: Array<string>;
+  choicesOrder?: "asc" | "desc";
+  placeholder?: string;
 };
 
-export type IDropdownAsync = {
-  name: string;
-
-  required: boolean;
-
-  title: string;
-
-  type: "dropdown_async";
-
-  url: string;
+export type IFileField = IBaseField & {
+  type: "file";
+  allowMultiple: boolean;
+  acceptedTypes: string;
+  maxSize: number;
+  sourceType: "camera" | "file" | "file-camera";
 };
 
-export type ITextField = {
-  format:
-    | "date"
-    | "email"
-    | "mobile_number"
-    | "numeric"
-    | "south_african_identity_number"
-    | null;
-
+export type ISignaturePadField = {
+  type: "signaturepad";
   name: string;
-
-  placeholder: string | null;
-
-  required: boolean;
-
   title: string;
+  description: string;
+  isRequired: boolean;
+  signatureAutoScaleEnabled: boolean;
+  penMinWidth: number;
+  penMaxWidth: number;
+  placeholder: string;
+  placeholderReadOnly: string;
+  penColor: string;
+  dataFormat: "jpg" | "png";
+  waitForUpload: boolean;
+};
 
+export type ITextField = IBaseField & {
   type: "text";
-};
-
-export type IUploadField = {
-  format: "photo" | null;
-
-  name: string;
-
-  required: boolean;
-
-  title: string;
-
-  type: "upload";
+  inputType?: "date" | "email" | "number" | "tel";
+  placeholder?: string;
+  validators?: Array<{
+    type: "regex";
+    text: string;
+    regex: string;
+  }>;
 };
 
 export type IField =
-  | IAgreementField
-  | IDropdown
-  | IDropdownAsync
-  | ITextField
-  | IUploadField;
+  | IDropdownField
+  | IFileField
+  | ISignaturePadField
+  | ITextField;

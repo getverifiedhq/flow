@@ -6,7 +6,6 @@ import {
   TextField,
 } from "@mui/material";
 import { IField } from "../core";
-import { UploadPhotoFieldComponent } from "./fields/upload-photo-field.component";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 
 export function FieldComponent(props: {
@@ -42,7 +41,7 @@ export function FieldComponent(props: {
           onChange={props.handleChange}
           value={props.value}
         >
-          {props.field.options.map((x, index: number) => (
+          {props.field.choices.map((x, index: number) => (
             <MenuItem key={index} value={x}>
               {x}
             </MenuItem>
@@ -52,18 +51,14 @@ export function FieldComponent(props: {
     );
   }
 
-  if (props.field.type === "upload") {
-    if (props.field.format === "photo") {
-      return (
-        <UploadPhotoFieldComponent field={props.field} onChange={() => {}} />
-      );
-    }
+  if (props.field.type === "file") {
+    // if (props.field.format === "photo") {
+    //   return (
+    //     <UploadPhotoFieldComponent field={props.field} onChange={() => {}} />
+    //   );
+    // }
 
     return <UploadFieldComponent field={props.field} onChange={() => {}} />;
-  }
-
-  if (props.field.type === "agreement") {
-    return <></>;
   }
 
   if (props.field.type === "text") {
@@ -72,7 +67,7 @@ export function FieldComponent(props: {
         disabled={props.disbaled}
         error={props.error}
         fullWidth
-        //   helperText="Enter your first name as it appears on your ID."
+        helperText={props.field.description}
         id={props.field.name}
         label={props.field.title}
         name={props.field.name}
@@ -86,39 +81,19 @@ export function FieldComponent(props: {
         placeholder={props.field.placeholder || undefined}
         slotProps={{
           htmlInput: {
-            inputMode: props.field.format === "numeric" ? "numeic" : undefined,
+            inputMode:
+              props.field.inputType === "number" ? "numeic" : undefined,
           },
           inputLabel: {
-            // shrink: props.field.format === "date" ? true : false,
             shrink: true,
           },
         }}
         sx={{ mb: 2 }}
-        type={props.field.format === "date" ? "date" : "text"}
+        type={props.field.inputType === "date" ? "date" : "text"}
         value={props.value}
       />
     );
   }
 
-  return (
-    <TextField
-      //   disabled={applicant.result.status !== "pending"}
-      //   error={formik.touched.firstName && formik.errors.firstName ? true : false}
-      fullWidth
-      //   helperText="Enter your first name as it appears on your ID."
-      id={props.field.name}
-      label={props.field.title}
-      name={props.field.name}
-      //   onBlur={formik.handleBlur}
-      //   onChange={formik.handleChange}
-      //   onKeyUp={(e) => {
-      //     if (e.key === "Enter") {
-      //       formik.submitForm();
-      //     }
-      //   }}
-      sx={{ mb: 2 }}
-      type="text"
-      // value={formik.values.firstName}
-    />
-  );
+  return <></>;
 }
