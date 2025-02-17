@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.4.4",
-    "@mui/x-date-pickers": "^7.26.0",
+    "@mui/x-date-pickers": "^7.27.0",
     "@tensorflow-models/face-detection": "^1.0.3",
     "@tensorflow/tfjs": "^4.22.0",
     "axios": "^1.7.9",
@@ -24,13 +24,13 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
     "react-signature-canvas": "^1.1.0-alpha.1",
-    "sass": "^1.84.0",
+    "sass": "^1.85.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@types/react-signature-canvas": "^1.0.7",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.19.0",
@@ -38,7 +38,7 @@
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "typescript": "~5.7.2",
-    "typescript-eslint": "^8.22.0",
+    "typescript-eslint": "^8.24.1",
     "vite": "^6.1.0"
   }
 }
