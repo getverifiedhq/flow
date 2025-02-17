@@ -1,22 +1,43 @@
 import { useRef, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { Delete, FileDownload } from "@mui/icons-material";
+import {
+  // fileToArrayBuffer,
+  IFileField,
+  // uploadArrayBuffer
+} from "../../core";
 
 export function UploadFieldComponent(props: {
   field: IFileField;
-  onChange: (url: string) => void;
+  onChange: (
+    files: Array<{
+      name: string;
+      size: number;
+      type: string;
+      url: string;
+    }>
+  ) => void;
+  value: Array<{
+    name: string;
+    size: number;
+    type: string;
+    url: string;
+  }>;
 }) {
   const inputElementFile = useRef(null as HTMLInputElement | null);
 
   const [state, setState] = useState({
-    error: null,
-    file: null,
     isLoading: false,
   } as {
-    error: string | null;
-    file: {
-      url: string;
-    } | null;
     isLoading: boolean;
   });
 
@@ -62,8 +83,6 @@ export function UploadFieldComponent(props: {
         // capture="environment"
         onChange={async (event: any) => {
           setState({
-            error: null,
-            file: null,
             isLoading: true,
           });
 
@@ -78,40 +97,60 @@ export function UploadFieldComponent(props: {
             return null;
           }
 
-          const file: File | null =
-            htmlInputElement.files.length === 1
-              ? htmlInputElement.files[0]
-              : null;
+          const files: Array<{
+            name: string;
+            size: number;
+            type: string;
+            url: string;
+          }> = [];
 
-          if (!file) {
-            setState({
-              error: "ERROR", // TODO
-              file: null,
-              isLoading: false,
+          for (const file of htmlInputElement.files) {
+            // const url: string = await uploadArrayBuffer(
+            //   await fileToArrayBuffer(file),
+            //   file.type
+            // );
+
+            files.push({
+              name: file.name,
+              size: file.size,
+              type: file.type,
+              url: "",
             });
-
-            return;
           }
 
-          const url: string = await uploadArrayBuffer(
-            await fileToArrayBuffer(file),
-            file.type
-          );
-
           setState({
-            error: null,
-            file: {
-              url,
-            },
             isLoading: false,
           });
 
-          props.onChange(url);
+          props.onChange([...props.value, ...files]);
         }}
         ref={inputElementFile}
         style={{ display: "none" }}
         type="file"
       />
+
+      <List sx={{ mb: 2 }}>
+        {props.value.map((x) => (
+          <ListItem
+            divider
+            secondaryAction={
+              <IconButton edge="end">
+                <Delete />
+              </IconButton>
+            }
+          >
+            <ListItemAvatar>
+              <Avatar>
+                <FileDownload />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={x.name}
+              secondary={`${(x.size / 1_000_000).toFixed(2)}MB`}
+            />
+          </ListItem>
+        ))}
+      </List>
     </>
   );
 }

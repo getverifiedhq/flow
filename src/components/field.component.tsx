@@ -54,7 +54,20 @@ export function FieldComponent(props: {
   }
 
   if (props.field.type === "file") {
-    return <UploadFieldComponent field={props.field} onChange={() => {}} />;
+    return (
+      <UploadFieldComponent
+        field={props.field}
+        onChange={(files) =>
+          props.handleChange({
+            target: {
+              name: props.field.name,
+              value: files,
+            },
+          })
+        }
+        value={props.value}
+      />
+    );
   }
 
   if (props.field.type === "signaturepad") {

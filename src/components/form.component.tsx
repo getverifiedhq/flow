@@ -9,7 +9,7 @@ export function FormComponent(props: {
   onSubmit: (data: { [key: string]: string }) => Promise<void>;
 }) {
   const [state, setState] = useState({
-    activeStep: 0,
+    activeStep: 2,
     data: props.data,
   });
 
@@ -28,10 +28,12 @@ export function FormComponent(props: {
               <StepLabel
                 optional={section.description || undefined}
                 onClick={() =>
-                  setState({
-                    activeStep: index,
-                    data: state.data,
-                  })
+                  index < state.activeStep
+                    ? setState({
+                        activeStep: index,
+                        data: state.data,
+                      })
+                    : null
                 }
               >
                 {section.title}

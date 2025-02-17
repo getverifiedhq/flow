@@ -5,22 +5,26 @@ import { IField, ISection } from "../core";
 import { FieldComponent } from "./field.component";
 
 export function SectionComponent(props: {
-  data: { [key: string]: string };
-  onSubmit: (data: { [key: string]: string }) => Promise<void>;
+  data: { [key: string]: any };
+  onSubmit: (data: { [key: string]: any }) => Promise<void>;
   section: ISection;
 }) {
   const formik = useFormik({
     initialValues: props.section.fields.reduce((dict, x) => {
-      dict[x.name] = props.data[x.name] || "";
+      if (x.type === "file") {
+        dict[x.name] = props.data[x.name] || [];
+      } else {
+        dict[x.name] = props.data[x.name] || "";
+      }
 
       return dict;
-    }, {} as { [key: string]: string }),
+    }, {} as { [key: string]: any }),
     onSubmit: async (values) => {
       props.onSubmit(values);
     },
     validationSchema: Yup.object().shape(
       props.section.fields.reduce((dict, x) => {
-        let schema = Yup.string();
+        let schema = x.type === "file" ? Yup.array() : Yup.string();
 
         if (x.isRequired) {
           schema = schema.required();
