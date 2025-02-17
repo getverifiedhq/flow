@@ -55,15 +55,11 @@ export function UploadFieldComponent(props: {
             {props.field.description}
           </Typography>
         ) : null}
-
-        {/* <Typography gutterBottom textAlign="center" variant="body2">
-          Max file size: 10 MB
-        </Typography> */}
       </Box>
 
       <input
-        accept="image/*"
-        capture="environment"
+        // accept="image/*"
+        // capture="environment"
         onChange={async (event: any) => {
           setState({
             error: null,

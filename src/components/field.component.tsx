@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers";
 import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 
@@ -67,6 +68,51 @@ export function FieldComponent(props: {
   }
 
   if (props.field.type === "text") {
+    if (props.field.inputType === "date" || props.field.inputType === "month") {
+      return (
+        <DatePicker
+          disabled={props.disbaled}
+          label={props.field.title}
+          maxDate={props.field.max ? new Date(props.field.max) : undefined}
+          minDate={props.field.min ? new Date(props.field.min) : undefined}
+          name={props.field.name}
+          onChange={(value: Date | null) =>
+            props.handleChange({
+              target: {
+                name: props.field.name,
+                value: value ? value.toISOString() : undefined,
+              },
+            })
+          }
+          onOpen={() =>
+            props.handleBlur({ target: { name: props.field.name } })
+          }
+          slotProps={{
+            textField: {
+              error: props.error,
+              fullWidth: true,
+              helperText: props.field.description,
+              id: props.field.name,
+              slotProps: {
+                input: {
+                  notched: true,
+                },
+                inputLabel: {
+                  shrink: true,
+                },
+              },
+              variant: "outlined",
+            },
+          }}
+          sx={{ mb: 2 }}
+          value={props.value ? new Date(props.value) : null}
+          views={
+            props.field.inputType === "month" ? ["month", "year"] : undefined
+          }
+        />
+      );
+    }
+
     return (
       <TextField
         disabled={props.disbaled}
@@ -83,7 +129,8 @@ export function FieldComponent(props: {
         //     formik.submitForm();
         //   }
         // }}
-        placeholder={props.field.placeholder || undefined}
+
+        placeholder={props.field.placeholder}
         slotProps={{
           htmlInput: {
             inputMode:
@@ -94,7 +141,7 @@ export function FieldComponent(props: {
           },
         }}
         sx={{ mb: 2 }}
-        type={props.field.inputType === "date" ? "date" : "text"}
+        type="text"
         value={props.value}
       />
     );

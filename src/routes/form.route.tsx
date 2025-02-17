@@ -1,3 +1,4 @@
+import { addDays, subYears } from "date-fns";
 import { FormComponent } from "../components/form.component";
 import { IForm } from "../core";
 
@@ -21,13 +22,14 @@ const FORM: IForm = {
           title: "When would you like to move-in?",
           isRequired: true,
           inputType: "date",
+          min: addDays(new Date(), 8).toISOString(),
         },
         {
           type: "text",
           name: "move_out_date",
           title: "When would you like to move-out? (optional)",
           isRequired: false,
-          inputType: "date",
+          inputType: "month",
         },
         {
           type: "dropdown",
@@ -85,6 +87,7 @@ const FORM: IForm = {
           title: "Date of Birth",
           isRequired: true,
           inputType: "date",
+          max: subYears(new Date(), 16).toISOString(),
         },
         {
           type: "text",
