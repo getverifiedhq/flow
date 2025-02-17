@@ -142,12 +142,14 @@ export function FieldComponent(props: {
         //     formik.submitForm();
         //   }
         // }}
-
         placeholder={props.field.placeholder}
         slotProps={{
           htmlInput: {
-            inputMode:
-              props.field.inputType === "number" ? "numeic" : undefined,
+            inputMode: props.field.inputType
+              ? { email: "email", number: "numeric", tel: "tel" }[
+                  props.field.inputType
+                ]
+              : undefined,
           },
           inputLabel: {
             shrink: true,

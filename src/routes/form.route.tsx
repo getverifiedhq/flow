@@ -14,7 +14,12 @@ const FORM: IForm = {
           name: "listing",
           title: "Which property are you applying for?",
           isRequired: true,
-          choices: ["14 Milton Rd, Sea Point, Cape Town, 8060, South Africa"],
+          choices: [
+            "14 Milton Rd, Sea Point, Cape Town, 8060, South Africa",
+            "37 Hely Hutchinson Ave, Bakoven, Cape Town, 8005, South Africa",
+            "47 Main Rd, Green Point, Cape Town, 8051, South Africa",
+            "63 Blaauwberg Rd, Table View, Cape Town, 7439, South Africa",
+          ],
         },
         {
           type: "text",
