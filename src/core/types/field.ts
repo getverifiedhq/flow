@@ -26,20 +26,11 @@ export type IFileField = IBaseField & {
   sourceType: "camera" | "file" | "file-camera";
 };
 
-export type ISignaturePadField = {
+export type ISignaturePadField = IBaseField & {
   type: "signaturepad";
-  name: string;
-  title: string;
-  description: string;
-  isRequired: boolean;
-  signatureAutoScaleEnabled: boolean;
-  penMinWidth: number;
-  penMaxWidth: number;
   placeholder: string;
-  placeholderReadOnly: string;
-  penColor: string;
-  dataFormat: "jpg" | "png";
-  waitForUpload: boolean;
+  // penColor: string;
+  // dataFormat: "jpg" | "png";
 };
 
 export type ITextField = IBaseField & {

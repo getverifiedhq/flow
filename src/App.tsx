@@ -33,6 +33,7 @@ const theme = createTheme({
     },
     primary: { main: "#93ad7c" },
     secondary: { main: "#d7ece8" },
+    error: { main: "hsl(344, 23%, 58%)" },
   },
   typography: {
     fontFamily: ["DM Sans", "sans-serif"].join(","),
@@ -42,6 +43,13 @@ const theme = createTheme({
       styleOverrides: {
         body: {
           backgroundColor: "#000000",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          color: "#ffffff",
         },
       },
     },

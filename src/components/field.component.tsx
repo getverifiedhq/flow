@@ -4,6 +4,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
@@ -52,13 +53,17 @@ export function FieldComponent(props: {
   }
 
   if (props.field.type === "file") {
-    // if (props.field.format === "photo") {
-    //   return (
-    //     <UploadPhotoFieldComponent field={props.field} onChange={() => {}} />
-    //   );
-    // }
-
     return <UploadFieldComponent field={props.field} onChange={() => {}} />;
+  }
+
+  if (props.field.type === "signaturepad") {
+    return (
+      <Typography sx={{ mb: 2 }} variant="body1">
+        <article
+          dangerouslySetInnerHTML={{ __html: props.field.description || "" }}
+        ></article>
+      </Typography>
+    );
   }
 
   if (props.field.type === "text") {
