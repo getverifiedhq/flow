@@ -1,0 +1,53 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    restart: unless-stopped
+    labels:
+      - "com.github.nginx-proxy.nginx=true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/certs:/etc/nginx/certs:rw
+      - ./nginx/vhost:/etc/nginx/vhost.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/dhparam:/etc/nginx/dhparam
+    environment:
+      - ENABLE_IPV6=true
+    networks:
+      - proxy_network
+
+  acme-companion:
+    image: nginxproxy/acme-companion:latest
+    container_name: acme-companion
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./nginx/certs:/etc/nginx/certs:rw
+      - ./nginx/vhost:/etc/nginx/vhost.d
+      - ./nginx/html:/usr/share/nginx/html
+    environment:
+      - DEFAULT_EMAIL=hirebarend@gmail.com
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    networks:
+      - proxy_network
+
+  flow:
+    image: ghcr.io/getverifiedhq/ui:main
+    container_name: flow
+    restart: unless-stopped
+    environment:
+      - LETSENCRYPT_HOST=demo.getverified.co.za
+      - HOST=demo.getverified.co.za
+      - VIRTUAL_HOST=demo.getverified.co.za
+      - VIRTUAL_PORT=80
+    networks:
+      - proxy_network
+
+networks:
+  proxy_network:
+    driver: bridge
