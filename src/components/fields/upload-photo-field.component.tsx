@@ -7,7 +7,7 @@ import {
   canvasToArrayBuffer,
   cropCanvas,
   fileToCanvas,
-  IUploadField,
+  IFileField,
   uploadArrayBuffer,
 } from "../../core";
 
@@ -33,7 +33,7 @@ export async function detectFace(htmlCanvasElement: HTMLCanvasElement) {
 }
 
 export function UploadPhotoFieldComponent(props: {
-  field: IUploadField;
+  field: IFileField;
   onChange: (url: string) => void;
 }) {
   const inputElementFile = useRef(null as HTMLInputElement | null);

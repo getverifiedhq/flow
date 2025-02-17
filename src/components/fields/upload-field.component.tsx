@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
-import { CameraAlt as Camera } from "@mui/icons-material";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
 
 export function UploadFieldComponent(props: {
