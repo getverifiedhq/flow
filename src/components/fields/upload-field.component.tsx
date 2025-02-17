@@ -2,14 +2,13 @@ import { useRef, useState } from "react";
 import {
   Avatar,
   Box,
-  IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Delete, FileDownload } from "@mui/icons-material";
+import { FileDownload } from "@mui/icons-material";
 import {
   // fileToArrayBuffer,
   IFileField,
@@ -129,28 +128,30 @@ export function UploadFieldComponent(props: {
         type="file"
       />
 
-      <List sx={{ mb: 2 }}>
-        {props.value.map((x) => (
-          <ListItem
-            divider
-            secondaryAction={
-              <IconButton edge="end">
-                <Delete />
-              </IconButton>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <FileDownload />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={x.name}
-              secondary={`${(x.size / 1_000_000).toFixed(2)}MB`}
-            />
-          </ListItem>
-        ))}
-      </List>
+      {props.value.length ? (
+        <List sx={{ mb: 2 }}>
+          {props.value.map((x) => (
+            <ListItem
+              divider
+              // secondaryAction={
+              //   <IconButton color="error" edge="end">
+              //     <Delete />
+              //   </IconButton>
+              // }
+            >
+              <ListItemAvatar>
+                <Avatar sx={{ bgcolor: "white" }}>
+                  <FileDownload />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={x.name}
+                secondary={`${(x.size / 1_000_000).toFixed(2)}MB`}
+              />
+            </ListItem>
+          ))}
+        </List>
+      ) : null}
     </>
   );
 }
