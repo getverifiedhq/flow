@@ -9,11 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { FileDownload } from "@mui/icons-material";
-import {
-  // fileToArrayBuffer,
-  IFileField,
-  // uploadArrayBuffer
-} from "../../core";
+import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
 
 export function UploadFieldComponent(props: {
   field: IFileField;
@@ -104,16 +100,16 @@ export function UploadFieldComponent(props: {
           }> = [];
 
           for (const file of htmlInputElement.files) {
-            // const url: string = await uploadArrayBuffer(
-            //   await fileToArrayBuffer(file),
-            //   file.type
-            // );
+            const url: string = await uploadArrayBuffer(
+              await fileToArrayBuffer(file),
+              file.type
+            );
 
             files.push({
               name: file.name,
               size: file.size,
               type: file.type,
-              url: "",
+              url,
             });
           }
 
@@ -133,6 +129,7 @@ export function UploadFieldComponent(props: {
           {props.value.map((x) => (
             <ListItem
               divider
+              key={x.url}
               // secondaryAction={
               //   <IconButton color="error" edge="end">
               //     <Delete />

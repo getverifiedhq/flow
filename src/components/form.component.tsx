@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Step, StepContent, StepLabel, Stepper } from "@mui/material";
 import { IForm } from "../core";
 import { SectionComponent } from "./section.component";
@@ -6,14 +6,9 @@ import { SectionComponent } from "./section.component";
 export function FormComponent(props: {
   data: { [key: string]: string };
   form: IForm;
-  onSubmit: (data: { [key: string]: string }) => Promise<void>;
+  onSubmit: (data: { [key: string]: string }, submit: boolean) => Promise<void>;
 }) {
-  const [state, setState] = useState({
-    activeStep: 0,
-    data: props.data,
-  });
-
-  useEffect(() => {}, [state]);
+  const [activeStep, setActiveStep] = useState(3);
 
   return (
     <>
@@ -22,34 +17,31 @@ export function FormComponent(props: {
           <img height={40} src={props.form.image} />
         </Box>
 
-        <Stepper activeStep={state.activeStep} orientation="vertical">
+        <Stepper activeStep={activeStep} orientation="vertical">
           {props.form.sections.map((section, index: number) => (
             <Step key={index}>
               <StepLabel
                 optional={section.description || undefined}
                 onClick={() =>
-                  index < state.activeStep
-                    ? setState({
-                        activeStep: index,
-                        data: state.data,
-                      })
-                    : null
+                  index < activeStep ? setActiveStep(index) : null
                 }
               >
                 {section.title}
               </StepLabel>
               <StepContent>
                 <SectionComponent
-                  data={state.data}
-                  onSubmit={async (x) =>
-                    setState({
-                      activeStep: state.activeStep + 1,
-                      data: {
-                        ...state.data,
+                  data={props.data}
+                  onSubmit={async (x) => {
+                    setActiveStep(activeStep + 1);
+
+                    await props.onSubmit(
+                      {
+                        ...props.data,
                         ...x,
                       },
-                    })
-                  }
+                      false
+                    );
+                  }}
                   section={section}
                 />
               </StepContent>

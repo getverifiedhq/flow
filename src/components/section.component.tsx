@@ -38,6 +38,20 @@ export function SectionComponent(props: {
           return dict;
         }
 
+        if (x.type === "signaturepad") {
+          let schema = Yup.string();
+
+          if (x.isRequired) {
+            schema = schema.required();
+          } else {
+            schema = schema.optional();
+          }
+
+          dict[x.name] = schema;
+
+          return dict;
+        }
+
         if (x.type === "text") {
           let schema = Yup.string();
 
@@ -68,6 +82,8 @@ export function SectionComponent(props: {
       }, {} as { [key: string]: any })
     ),
   });
+
+  console.log(formik.values);
 
   return (
     <Box sx={{ my: 2 }}>

@@ -1,6 +1,8 @@
+import axios from "axios";
 import { addDays, subYears } from "date-fns";
 import { FormComponent } from "../components/form.component";
 import { IForm } from "../core";
+import { useFetch } from "../hooks";
 
 const FORM: IForm = {
   image:
@@ -97,7 +99,8 @@ const FORM: IForm = {
         {
           type: "text",
           name: "applicant_identity_number",
-          title: "Identity Number",
+          // title: "Identity Number",
+          title: "South African ID or Passport Number",
           isRequired: true,
         },
         {
@@ -164,7 +167,7 @@ const FORM: IForm = {
           name: "applicant_employment_salary",
           title: "Salary",
           isRequired: true,
-          inputType: "number",
+          inputType: "currency",
         },
       ],
       title: "Employment Information",
@@ -202,18 +205,44 @@ const FORM: IForm = {
       ],
       title: "Consent",
     },
-    {
-      description: null,
-      fields: [],
-      title: "Payment",
-    },
+    // {
+    //   description: null,
+    //   fields: [],
+    //   title: "Payment",
+    // },
   ],
 };
 
 export function FormRoute() {
+  const fetch = useFetch({
+    auto: false,
+    dependencies: [],
+    fn: async (data: { [key: string]: any }) => {
+      const response: any = fetch.result
+        ? await axios.put<{ data: { [key: string]: any }; id: string }>(
+            `https://staging.api.getverified.co.za/api/v1/data/${fetch.result.id}`,
+            {
+              data,
+            }
+          )
+        : await axios.post<{ data: { [key: string]: any }; id: string }>(
+            "https://staging.api.getverified.co.za/api/v1/data",
+            {
+              data,
+            }
+          );
+
+      return response.data;
+    },
+  });
+
   return (
     <>
-      <FormComponent data={{}} form={FORM} onSubmit={async () => {}} />
+      <FormComponent
+        data={fetch.result ? fetch.result.data || {} : {}}
+        form={FORM}
+        onSubmit={async (data) => fetch.fetch(data)}
+      />
     </>
   );
 }

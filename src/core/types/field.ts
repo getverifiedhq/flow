@@ -35,7 +35,7 @@ export type ISignaturePadField = IBaseField & {
 
 export type ITextField = IBaseField & {
   type: "text";
-  inputType?: "date" | "email" | "month" | "number" | "tel";
+  inputType?: "currency" | "date" | "email" | "month" | "number" | "tel";
   max?: string;
   min?: string;
   placeholder?: string;

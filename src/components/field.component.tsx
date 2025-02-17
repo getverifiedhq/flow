@@ -1,14 +1,19 @@
 import {
+  Box,
   FormControl,
+  InputAdornment,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import SignatureCanvas from "react-signature-canvas";
 import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
+import { useEffect, useRef, useState } from "react";
 
 export function FieldComponent(props: {
   disbaled: boolean;
@@ -71,16 +76,86 @@ export function FieldComponent(props: {
   }
 
   if (props.field.type === "signaturepad") {
+    const refBox = useRef(null as HTMLDivElement | null);
+
+    const refSignatureCanvas = useRef(null as SignatureCanvas | null);
+
+    const [_, setState] = useState(false);
+
+    useEffect(() => {
+      setState(true);
+    }, [refBox]);
+
     return (
-      <Typography sx={{ mb: 2 }} variant="body1">
-        <article
-          dangerouslySetInnerHTML={{ __html: props.field.description || "" }}
-        ></article>
-      </Typography>
+      <>
+        <Typography component="div" sx={{ mb: 2 }} variant="body1">
+          <article
+            dangerouslySetInnerHTML={{ __html: props.field.description || "" }}
+          ></article>
+        </Typography>
+        <Box ref={refBox} sx={{ mb: 2 }}>
+          {refBox && refBox.current ? (
+            <SignatureCanvas
+              backgroundColor="#f9f9f9"
+              canvasProps={{
+                height: Math.floor(refBox.current.clientWidth / 2),
+                style: { borderRadius: "0.5rem" },
+                width: refBox.current.clientWidth,
+              }}
+              onEnd={() =>
+                props.handleChange({
+                  target: {
+                    name: props.field.name,
+                    value: refSignatureCanvas.current?.isEmpty()
+                      ? ""
+                      : refSignatureCanvas.current?.toDataURL("image/png"),
+                  },
+                })
+              }
+              penColor="black"
+              ref={refSignatureCanvas}
+            />
+          ) : null}
+        </Box>
+      </>
     );
   }
 
   if (props.field.type === "text") {
+    if (props.field.inputType === "currency") {
+      return (
+        <FormControl fullWidth sx={{ m: 1 }}>
+          <InputLabel shrink>{props.field.title}</InputLabel>
+          <OutlinedInput
+            disabled={props.disbaled}
+            error={props.error}
+            fullWidth
+            // helperText={props.field.description}
+            id={props.field.name}
+            label={props.field.title}
+            name={props.field.name}
+            onBlur={props.handleBlur}
+            onChange={props.handleChange}
+            // onKeyUp={(e) => {
+            //   if (e.key === "Enter") {
+            //     formik.submitForm();
+            //   }
+            // }}
+            placeholder={props.field.placeholder}
+            slotProps={{
+              input: {
+                inputMode: "numeric",
+              },
+            }}
+            startAdornment={<InputAdornment position="start">R</InputAdornment>}
+            sx={{ mb: 2 }}
+            type="text"
+            value={props.value}
+          />
+        </FormControl>
+      );
+    }
+
     if (props.field.inputType === "date" || props.field.inputType === "month") {
       return (
         <DatePicker
