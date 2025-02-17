@@ -38,7 +38,7 @@ export function FormComponent(props: {
               </StepLabel>
               <StepContent>
                 <SectionComponent
-                  data={props.data}
+                  data={state.data}
                   onSubmit={async (x) =>
                     setState({
                       activeStep: state.activeStep + 1,

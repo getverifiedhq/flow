@@ -122,13 +122,6 @@ const FORM: IForm = {
     {
       description: null,
       fields: [
-        // {
-        //   format: "photo",
-        //   name: "applicant_documents_photo",
-        //   required: true,
-        //   title: "Photo",
-        //   type: "upload",
-        // },
         {
           type: "file",
           name: "applicant_documents_identity_document",

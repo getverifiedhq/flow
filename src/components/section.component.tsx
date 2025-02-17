@@ -20,8 +20,15 @@ export function SectionComponent(props: {
     },
     validationSchema: Yup.object().shape(
       props.section.fields.reduce((dict, x) => {
-        // TODO
-        dict[x.name] = Yup.string().required();
+        let schema = Yup.string();
+
+        if (x.isRequired) {
+          schema = schema.required();
+        } else {
+          schema = schema.optional();
+        }
+
+        dict[x.name] = schema;
 
         return dict;
       }, {} as { [key: string]: any })
