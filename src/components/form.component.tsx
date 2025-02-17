@@ -9,7 +9,7 @@ export function FormComponent(props: {
   onSubmit: (data: { [key: string]: string }) => Promise<void>;
 }) {
   const [state, setState] = useState({
-    activeStep: 2,
+    activeStep: 0,
     data: props.data,
   });
 

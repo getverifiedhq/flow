@@ -24,15 +24,45 @@ export function SectionComponent(props: {
     },
     validationSchema: Yup.object().shape(
       props.section.fields.reduce((dict, x) => {
-        let schema = x.type === "file" ? Yup.array() : Yup.string();
+        if (x.type === "file") {
+          let schema = Yup.array();
 
-        if (x.isRequired) {
-          schema = schema.required();
-        } else {
-          schema = schema.optional();
+          if (x.isRequired) {
+            schema = schema.min(1);
+          } else {
+            schema = schema.min(0);
+          }
+
+          dict[x.name] = schema;
+
+          return dict;
         }
 
-        dict[x.name] = schema;
+        if (x.type === "text") {
+          let schema = Yup.string();
+
+          if (x.inputType === "email") {
+            schema = schema.email();
+          }
+
+          if (x.inputType === "number") {
+            schema = schema.matches(/^\d*$/);
+          }
+
+          if (x.inputType === "tel") {
+            schema = schema.matches(/^\d*$/);
+          }
+
+          if (x.isRequired) {
+            schema = schema.required();
+          } else {
+            schema = schema.optional();
+          }
+
+          dict[x.name] = schema;
+
+          return dict;
+        }
 
         return dict;
       }, {} as { [key: string]: any })
