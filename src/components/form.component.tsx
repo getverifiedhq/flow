@@ -32,6 +32,20 @@ export function FormComponent(props: {
                 <SectionComponent
                   data={props.data}
                   onSubmit={async (x) => {
+                    if (index + 1 >= props.form.sections.length) {
+                      setActiveStep(activeStep + 1);
+
+                      await props.onSubmit(
+                        {
+                          ...props.data,
+                          ...x,
+                        },
+                        true
+                      );
+
+                      return;
+                    }
+
                     setActiveStep(activeStep + 1);
 
                     await props.onSubmit(

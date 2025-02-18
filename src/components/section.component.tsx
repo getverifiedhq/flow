@@ -11,7 +11,13 @@ export function SectionComponent(props: {
 }) {
   const formik = useFormik({
     initialValues: props.section.fields.reduce((dict, x) => {
-      if (x.type === "file") {
+      if (x.type === "dropdown") {
+        if (x.choicesByUrl) {
+          dict[x.name] = props.data[x.name] || null;
+        } else {
+          dict[x.name] = props.data[x.name] || "";
+        }
+      } else if (x.type === "file") {
         dict[x.name] = props.data[x.name] || [];
       } else {
         dict[x.name] = props.data[x.name] || "";
@@ -24,6 +30,28 @@ export function SectionComponent(props: {
     },
     validationSchema: Yup.object().shape(
       props.section.fields.reduce((dict, x) => {
+        if (x.type === "dropdown") {
+          if (x.choicesByUrl) {
+            let schema = Yup.object();
+
+            dict[x.name] = schema;
+
+            return dict;
+          }
+
+          let schema = Yup.string();
+
+          if (x.isRequired) {
+            schema = schema.required();
+          } else {
+            schema = schema.optional();
+          }
+
+          dict[x.name] = schema;
+
+          return dict;
+        }
+
         if (x.type === "file") {
           let schema = Yup.array();
 
@@ -83,13 +111,11 @@ export function SectionComponent(props: {
     ),
   });
 
-  console.log(formik.values);
-
   return (
     <Box sx={{ my: 2 }}>
       {props.section.fields.map((field: IField, index: number) => (
         <FieldComponent
-          disbaled={formik.isSubmitting}
+          disabled={formik.isSubmitting}
           error={
             formik.touched[field.name] && formik.errors[field.name]
               ? true

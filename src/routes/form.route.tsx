@@ -16,12 +16,19 @@ const FORM: IForm = {
           name: "listing",
           title: "Which property are you applying for?",
           isRequired: true,
+          placeholder: "Start typing...",
           choices: [
             "14 Milton Rd, Sea Point, Cape Town, 8060, South Africa",
             "37 Hely Hutchinson Ave, Bakoven, Cape Town, 8005, South Africa",
             "47 Main Rd, Green Point, Cape Town, 8051, South Africa",
             "63 Blaauwberg Rd, Table View, Cape Town, 7439, South Africa",
           ],
+          choicesByUrl: {
+            path: "",
+            titleName: "label",
+            url: "",
+            valueName: "id",
+          },
         },
         {
           type: "text",
@@ -37,6 +44,7 @@ const FORM: IForm = {
           title: "When would you like to move-out? (optional)",
           isRequired: false,
           inputType: "month",
+          min: addDays(new Date(), 8).toISOString(),
         },
         {
           type: "dropdown",

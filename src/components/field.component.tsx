@@ -14,9 +14,10 @@ import SignatureCanvas from "react-signature-canvas";
 import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 import { useEffect, useRef, useState } from "react";
+import { SearchableDropdownAsync } from "./fields/searchable-dropdown-async.component";
 
 export function FieldComponent(props: {
-  disbaled: boolean;
+  disabled: boolean;
   error: boolean;
   field: IField;
   handleBlur: {
@@ -34,11 +35,24 @@ export function FieldComponent(props: {
   value: any;
 }) {
   if (props.field.type === "dropdown") {
+    if (props.field.choicesByUrl) {
+      return (
+        <SearchableDropdownAsync
+          disabled={props.disabled}
+          error={props.error}
+          field={props.field}
+          handleBlur={props.handleBlur}
+          handleChange={props.handleChange}
+          value={props.value}
+        />
+      );
+    }
+
     return (
       <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel shrink>{props.field.title}</InputLabel>
         <Select
-          disabled={props.disbaled}
+          disabled={props.disabled}
           error={props.error}
           id={props.field.name}
           label={props.field.title}
@@ -127,7 +141,7 @@ export function FieldComponent(props: {
         <FormControl fullWidth sx={{ m: 1 }}>
           <InputLabel shrink>{props.field.title}</InputLabel>
           <OutlinedInput
-            disabled={props.disbaled}
+            disabled={props.disabled}
             error={props.error}
             fullWidth
             // helperText={props.field.description}
@@ -159,7 +173,7 @@ export function FieldComponent(props: {
     if (props.field.inputType === "date" || props.field.inputType === "month") {
       return (
         <DatePicker
-          disabled={props.disbaled}
+          disabled={props.disabled}
           label={props.field.title}
           maxDate={props.field.max ? new Date(props.field.max) : undefined}
           minDate={props.field.min ? new Date(props.field.min) : undefined}
@@ -193,6 +207,7 @@ export function FieldComponent(props: {
             },
           }}
           sx={{ mb: 2 }}
+          timezone="UTC"
           value={props.value ? new Date(props.value) : null}
           views={
             props.field.inputType === "month" ? ["month", "year"] : undefined
@@ -203,7 +218,7 @@ export function FieldComponent(props: {
 
     return (
       <TextField
-        disabled={props.disbaled}
+        disabled={props.disabled}
         error={props.error}
         fullWidth
         helperText={props.field.description}
