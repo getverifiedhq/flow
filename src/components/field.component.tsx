@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Box,
   FormControl,
@@ -10,12 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+import { format, parseISO } from "date-fns";
 import SignatureCanvas from "react-signature-canvas";
 import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
-import { useEffect, useRef, useState } from "react";
 import { SearchableDropdownAsync } from "./fields/searchable-dropdown-async.component";
-import { format, parseISO } from "date-fns";
 
 export function FieldComponent(props: {
   disabled: boolean;

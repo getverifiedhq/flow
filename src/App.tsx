@@ -1,18 +1,18 @@
+import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { FormRoute } from "./routes";
-import { CssBaseline } from "@mui/material";
+import { MainRoute } from "./routes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <FormRoute />,
+    element: <MainRoute />,
   },
   {
     path: "/:id",
-    element: <FormRoute />,
+    element: <MainRoute />,
   },
 ]);
 

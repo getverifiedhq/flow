@@ -12,6 +12,7 @@ import { SectionComponent } from "./section.component";
 
 export function FormComponent(props: {
   data: { [key: string]: string };
+  disabled: boolean;
   form: IForm;
   onSubmit: (data: { [key: string]: string }, submit: boolean) => Promise<void>;
 }) {
@@ -34,7 +35,9 @@ export function FormComponent(props: {
               <StepLabel
                 optional={section.description || undefined}
                 onClick={() =>
-                  index < activeStep ? setActiveStep(index) : null
+                  index < activeStep || props.disabled
+                    ? setActiveStep(index)
+                    : null
                 }
               >
                 {section.title}
@@ -42,10 +45,27 @@ export function FormComponent(props: {
               <StepContent>
                 <SectionComponent
                   data={props.data}
+                  disabled={props.disabled}
                   onSubmit={async (x) => {
                     if (index + 1 >= props.form.sections.length) {
                       setActiveStep(activeStep + 1);
 
+                      if (!props.disabled) {
+                        await props.onSubmit(
+                          {
+                            ...props.data,
+                            ...x,
+                          },
+                          true
+                        );
+                      }
+
+                      return;
+                    }
+
+                    setActiveStep(activeStep + 1);
+
+                    if (!props.disabled) {
                       await props.onSubmit(
                         {
                           ...props.data,
@@ -53,19 +73,7 @@ export function FormComponent(props: {
                         },
                         true
                       );
-
-                      return;
                     }
-
-                    setActiveStep(activeStep + 1);
-
-                    await props.onSubmit(
-                      {
-                        ...props.data,
-                        ...x,
-                      },
-                      false
-                    );
                   }}
                   section={section}
                 />

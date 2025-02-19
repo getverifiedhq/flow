@@ -1,1 +1,1 @@
-export * from "./form.route";
+export * from "./main.route";

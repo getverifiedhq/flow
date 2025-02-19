@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IField, ISection } from "../core";
 import { FieldComponent } from "./field.component";
-import { useEffect } from "react";
 
 export function SectionComponent(props: {
   data: { [key: string]: any };
+  disabled: boolean;
   onSubmit: (data: { [key: string]: any }) => Promise<void>;
   section: ISection;
 }) {
@@ -136,7 +137,7 @@ export function SectionComponent(props: {
     <Box sx={{ my: 2 }}>
       {props.section.fields.map((field: IField, index: number) => (
         <FieldComponent
-          disabled={formik.isSubmitting}
+          disabled={props.disabled || formik.isSubmitting}
           error={
             formik.touched[field.name] && formik.errors[field.name]
               ? true

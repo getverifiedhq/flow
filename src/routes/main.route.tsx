@@ -1,9 +1,9 @@
 import axios from "axios";
 import { addDays, subYears } from "date-fns";
+import { useParams } from "react-router-dom";
 import { FormComponent } from "../components/form.component";
 import { IForm } from "../core";
 import { useFetch } from "../hooks";
-import { useParams } from "react-router-dom";
 
 const FORM: IForm = {
   image:
@@ -220,7 +220,7 @@ const FORM: IForm = {
   title: "Rental Application",
 };
 
-export function FormRoute() {
+export function MainRoute() {
   const params = useParams();
 
   const fetch = useFetch({
@@ -257,6 +257,7 @@ export function FormRoute() {
   return (
     <>
       <FormComponent
+        disabled={true}
         data={fetch.result ? fetch.result.data || {} : {}}
         form={FORM}
         onSubmit={async (data, submit: boolean) => {
