@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IField, ISection } from "../core";
 import { FieldComponent } from "./field.component";
+import { useEffect } from "react";
 
 export function SectionComponent(props: {
   data: { [key: string]: any };
@@ -110,6 +111,26 @@ export function SectionComponent(props: {
       }, {} as { [key: string]: any })
     ),
   });
+
+  useEffect(() => {
+    formik.setValues(
+      props.section.fields.reduce((dict, x) => {
+        if (x.type === "dropdown") {
+          if (x.choicesByUrl) {
+            dict[x.name] = props.data[x.name] || null;
+          } else {
+            dict[x.name] = props.data[x.name] || "";
+          }
+        } else if (x.type === "file") {
+          dict[x.name] = props.data[x.name] || [];
+        } else {
+          dict[x.name] = props.data[x.name] || "";
+        }
+
+        return dict;
+      }, {} as { [key: string]: any })
+    );
+  }, [props.data]);
 
   return (
     <Box sx={{ my: 2 }}>
