@@ -7,6 +7,7 @@ import { useFetch } from "../hooks";
 const FORM: IForm = {
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
+  payment: true,
   sections: [
     {
       description: null,
@@ -214,12 +215,8 @@ const FORM: IForm = {
       ],
       title: "Consent",
     },
-    // {
-    //   description: null,
-    //   fields: [],
-    //   title: "Payment",
-    // },
   ],
+  title: "Rental Application",
 };
 
 export function FormRoute() {
@@ -229,13 +226,13 @@ export function FormRoute() {
     fn: async (data: { [key: string]: any }) => {
       const response: any = fetch.result
         ? await axios.put<{ data: { [key: string]: any }; id: string }>(
-            `https://staging.api.getverified.co.za/api/v1/data/${fetch.result.id}`,
+            `https://staging.api.getverified.co.za/api/v1/records/${fetch.result.id}`,
             {
               data,
             }
           )
         : await axios.post<{ data: { [key: string]: any }; id: string }>(
-            "https://staging.api.getverified.co.za/api/v1/data",
+            "https://staging.api.getverified.co.za/api/v1/records",
             {
               data,
             }
@@ -250,7 +247,36 @@ export function FormRoute() {
       <FormComponent
         data={fetch.result ? fetch.result.data || {} : {}}
         form={FORM}
-        onSubmit={async (data) => fetch.fetch(data)}
+        onSubmit={async (data, submit: boolean) => {
+          await fetch.fetch(data);
+
+          if (submit) {
+            const response = await axios.post(
+              "https://api.paystack.co/transaction/initialize",
+              {
+                amount: 99500,
+                channels: ["card"],
+                email: data["applicant_email_address"],
+                callback_url: `${window.location.origin}/${fetch.result.id}/thank-you`,
+                metadata: {
+                  reference: fetch.result.id,
+                },
+              },
+              {
+                headers: {
+                  // authorization: `Bearer ${
+                  //   import.meta.env.PROD
+                  //     ? "sk_live_6280b04e712004355bb26155e3494011c2196fd6"
+                  //     : "sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"
+                  // }`,
+                  authorization: `Bearer sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993`,
+                },
+              }
+            );
+
+            window.location.href = response.data.data.authorization_url;
+          }
+        }}
       />
     </>
   );
