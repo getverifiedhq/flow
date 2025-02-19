@@ -11,7 +11,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Delete, FileDownload } from "@mui/icons-material";
+import { Close, FileDownload } from "@mui/icons-material";
 import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
 
 export function UploadFieldComponent(props: {
@@ -194,7 +194,7 @@ export function UploadFieldComponent(props: {
                       })
                     }
                   >
-                    <Delete />
+                    <Close />
                   </IconButton>
                 )
               }
@@ -207,6 +207,9 @@ export function UploadFieldComponent(props: {
               <ListItemText
                 primary={x.name}
                 secondary={`${(x.size / 1_000_000).toFixed(2)}MB`}
+                sx={{
+                  overflow: "auto",
+                }}
               />
             </ListItem>
           ))}

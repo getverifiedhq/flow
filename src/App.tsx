@@ -10,6 +10,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <FormRoute />,
   },
+  {
+    path: "/:id",
+    element: <FormRoute />,
+  },
 ]);
 
 // const theme = createTheme({

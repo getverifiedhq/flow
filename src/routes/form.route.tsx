@@ -3,6 +3,7 @@ import { addDays, subYears } from "date-fns";
 import { FormComponent } from "../components/form.component";
 import { IForm } from "../core";
 import { useFetch } from "../hooks";
+import { useParams } from "react-router-dom";
 
 const FORM: IForm = {
   image:
@@ -220,10 +221,21 @@ const FORM: IForm = {
 };
 
 export function FormRoute() {
+  const params = useParams();
+
   const fetch = useFetch({
-    auto: false,
-    dependencies: [],
-    fn: async (data: { [key: string]: any }) => {
+    auto: params.id ? true : false,
+    dependencies: [params.id],
+    fn: async (data: { [key: string]: any } | null) => {
+      if (!data) {
+        const response: any = await axios.get<{
+          data: { [key: string]: any };
+          id: string;
+        }>(`https://staging.api.getverified.co.za/api/v1/records/${params.id}`);
+
+        return response.data;
+      }
+
       const response: any = fetch.result
         ? await axios.put<{ data: { [key: string]: any }; id: string }>(
             `https://staging.api.getverified.co.za/api/v1/records/${fetch.result.id}`,
@@ -257,7 +269,8 @@ export function FormRoute() {
                 amount: 99500,
                 channels: ["card"],
                 email: data["applicant_email_address"],
-                callback_url: `${window.location.origin}/${fetch.result.id}/thank-you`,
+                // callback_url: `${window.location.origin}/${fetch.result.id}/thank-you`,
+                callback_url: `${window.location.origin}`,
                 metadata: {
                   reference: fetch.result.id,
                 },
