@@ -1,21 +1,24 @@
 import { useEffect, useRef, useState } from "react";
+import { faker } from "@faker-js/faker";
 import {
   Avatar,
   Box,
   CircularProgress,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Typography,
 } from "@mui/material";
-import { FileDownload } from "@mui/icons-material";
+import { Delete, FileDownload } from "@mui/icons-material";
 import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
 
 export function UploadFieldComponent(props: {
   field: IFileField;
   onChange: (
     files: Array<{
+      id: string;
       name: string;
       size: number;
       type: string;
@@ -23,6 +26,7 @@ export function UploadFieldComponent(props: {
     }>
   ) => void;
   value: Array<{
+    id: string;
     name: string;
     size: number;
     type: string;
@@ -44,6 +48,7 @@ export function UploadFieldComponent(props: {
     isLoading: false,
   } as {
     files: Array<{
+      id: string;
       isLoading: boolean;
       name: string;
       size: number;
@@ -59,6 +64,7 @@ export function UploadFieldComponent(props: {
         .filter((x) => !x.isLoading)
         .map((x) => {
           return {
+            id: x.id,
             name: x.name,
             size: x.size,
             type: x.type,
@@ -124,11 +130,17 @@ export function UploadFieldComponent(props: {
           }
 
           for (const file of htmlInputElement.files) {
+            const id: string = faker.string.alphanumeric({
+              casing: "lower",
+              length: 6,
+            });
+
             setState((previousState) => {
               return {
                 files: [
                   ...previousState.files,
                   {
+                    id,
                     isLoading: true,
                     name: file.name,
                     size: file.size,
@@ -146,7 +158,7 @@ export function UploadFieldComponent(props: {
                 setState((previousState) => {
                   return {
                     files: previousState.files.map((x) => {
-                      if (x.name === file.name) {
+                      if (x.id === id) {
                         x.isLoading = false;
                         x.url = url;
                       }
@@ -169,8 +181,23 @@ export function UploadFieldComponent(props: {
           {state.files.map((x) => (
             <ListItem
               divider
-              key={x.url}
-              secondaryAction={x.isLoading ? <CircularProgress /> : null}
+              key={x.id}
+              secondaryAction={
+                x.isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <IconButton
+                    onClick={() =>
+                      setState({
+                        files: state.files.filter((y) => y.id !== x.id),
+                        isLoading: state.isLoading,
+                      })
+                    }
+                  >
+                    <Delete />
+                  </IconButton>
+                )
+              }
             >
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: "white" }}>
