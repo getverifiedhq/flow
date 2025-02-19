@@ -60,6 +60,7 @@ const FORM: IForm = {
             "JP",
             "Kelly",
           ],
+          choicesOrder: "asc",
         },
         {
           type: "dropdown",

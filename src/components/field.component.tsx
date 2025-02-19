@@ -15,6 +15,7 @@ import { IField } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 import { useEffect, useRef, useState } from "react";
 import { SearchableDropdownAsync } from "./fields/searchable-dropdown-async.component";
+import { format, parseISO } from "date-fns";
 
 export function FieldComponent(props: {
   disabled: boolean;
@@ -62,7 +63,10 @@ export function FieldComponent(props: {
           onChange={props.handleChange}
           value={props.value}
         >
-          {props.field.choices.map((x, index: number) => (
+          {(props.field.choicesOrder
+            ? props.field.choices.sort()
+            : props.field.choices
+          ).map((x, index: number) => (
             <MenuItem key={index} value={x}>
               {x}
             </MenuItem>
@@ -182,7 +186,7 @@ export function FieldComponent(props: {
             props.handleChange({
               target: {
                 name: props.field.name,
-                value: value ? value.toISOString() : undefined,
+                value: value ? format(value, "yyyy-MM-dd HH:mm:ss") : undefined,
               },
             })
           }
@@ -208,7 +212,7 @@ export function FieldComponent(props: {
           }}
           sx={{ mb: 2 }}
           timezone="UTC"
-          value={props.value ? new Date(props.value) : null}
+          value={props.value ? parseISO(props.value) : null}
           views={
             props.field.inputType === "month" ? ["month", "year"] : undefined
           }

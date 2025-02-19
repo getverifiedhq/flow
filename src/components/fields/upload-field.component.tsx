@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Box,
+  CircularProgress,
   List,
   ListItem,
   ListItemAvatar,
@@ -31,10 +32,41 @@ export function UploadFieldComponent(props: {
   const inputElementFile = useRef(null as HTMLInputElement | null);
 
   const [state, setState] = useState({
+    files: props.value.map((x) => {
+      return {
+        isLoading: false,
+        name: x.name,
+        size: x.size,
+        type: x.type,
+        url: x.url,
+      };
+    }),
     isLoading: false,
   } as {
+    files: Array<{
+      isLoading: boolean;
+      name: string;
+      size: number;
+      type: string;
+      url: string;
+    }>;
     isLoading: boolean;
   });
+
+  useEffect(() => {
+    props.onChange(
+      state.files
+        .filter((x) => !x.isLoading)
+        .map((x) => {
+          return {
+            name: x.name,
+            size: x.size,
+            type: x.type,
+            url: x.url,
+          };
+        })
+    );
+  }, [state.files]);
 
   return (
     <>
@@ -74,10 +106,9 @@ export function UploadFieldComponent(props: {
       </Box>
 
       <input
-        // accept="image/*"
-        // capture="environment"
         onChange={async (event: any) => {
           setState({
+            files: [...state.files],
             isLoading: true,
           });
 
@@ -92,49 +123,54 @@ export function UploadFieldComponent(props: {
             return null;
           }
 
-          const files: Array<{
-            name: string;
-            size: number;
-            type: string;
-            url: string;
-          }> = [];
-
           for (const file of htmlInputElement.files) {
-            const url: string = await uploadArrayBuffer(
-              await fileToArrayBuffer(file),
-              file.type
-            );
-
-            files.push({
-              name: file.name,
-              size: file.size,
-              type: file.type,
-              url,
+            setState((previousState) => {
+              return {
+                files: [
+                  ...previousState.files,
+                  {
+                    isLoading: true,
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    url: "",
+                  },
+                ],
+                isLoading: true,
+              };
             });
+
+            fileToArrayBuffer(file)
+              .then((arrayBuffer) => uploadArrayBuffer(arrayBuffer, file.type))
+              .then((url) =>
+                setState((previousState) => {
+                  return {
+                    files: previousState.files.map((x) => {
+                      if (x.name === file.name) {
+                        x.isLoading = false;
+                        x.url = url;
+                      }
+
+                      return x;
+                    }),
+                    isLoading: previousState.files.some((x) => x.isLoading),
+                  };
+                })
+              );
           }
-
-          setState({
-            isLoading: false,
-          });
-
-          props.onChange([...props.value, ...files]);
         }}
         ref={inputElementFile}
         style={{ display: "none" }}
         type="file"
       />
 
-      {props.value.length ? (
+      {state.files.length ? (
         <List sx={{ mb: 2 }}>
-          {props.value.map((x) => (
+          {state.files.map((x) => (
             <ListItem
               divider
               key={x.url}
-              // secondaryAction={
-              //   <IconButton color="error" edge="end">
-              //     <Delete />
-              //   </IconButton>
-              // }
+              secondaryAction={x.isLoading ? <CircularProgress /> : null}
             >
               <ListItemAvatar>
                 <Avatar sx={{ bgcolor: "white" }}>
