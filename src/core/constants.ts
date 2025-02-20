@@ -215,6 +215,148 @@ export const BASE_FORM: IForm = {
   title: "Rental Application",
 };
 
+export const FORM_GET_VERIFIED: IForm = {
+  image: "/images/get-verified.png",
+  payment: true,
+  sections: [
+    {
+      description: null,
+      fields: [
+        {
+          type: "text",
+          name: "applicant_first_name",
+          title: "First Name",
+          description: "Enter your first name as it appears on your ID.",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "applicant_last_name",
+          title: "Last Name",
+          description: "Enter your last name as it appears on your ID.",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "applicant_date_of_birth",
+          title: "Date of Birth",
+          isRequired: true,
+          inputType: "date",
+          max: subYears(new Date(), 16).toISOString(),
+        },
+        {
+          type: "text",
+          name: "applicant_identity_number",
+          // title: "Identity Number",
+          title: "South African ID or Passport Number",
+          isRequired: true,
+        },
+        {
+          type: "dropdown",
+          name: "applicant_marital_status",
+          title: "Marital Status",
+          isRequired: true,
+          choices: ["Single", "Married", "Divorced", "Other"],
+        },
+        {
+          type: "text",
+          name: "applicant_email_address",
+          title: "Email Address",
+          isRequired: true,
+          inputType: "email",
+        },
+        {
+          type: "text",
+          name: "applicant_mobile_number",
+          title: "Mobile Number",
+          isRequired: true,
+          inputType: "tel",
+        },
+      ],
+      title: "Personal Information",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "file",
+          name: "applicant_documents_identity_document",
+          title: "Identity Document",
+          description:
+            "Please upload a photo of your identity document such as your South African Smart ID Card, Green ID Book or Passport.",
+          isRequired: true,
+          allowMultiple: false,
+          acceptedTypes: "image/png",
+          maxSize: 10_000,
+          sourceType: "camera",
+        },
+      ],
+      title: "Identity Verification",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "text",
+          name: "applicant_employment_employer_name",
+          title: "Employer Name",
+          isRequired: true,
+          placeholder: "Mister Spex (Pty) Ltd",
+        },
+        {
+          type: "text",
+          name: "applicant_employment_occupation",
+          title: "Occupation",
+          isRequired: true,
+          placeholder: "Supervisor",
+        },
+        {
+          type: "text",
+          name: "applicant_employment_salary",
+          title: "Salary",
+          isRequired: true,
+          inputType: "currency",
+        },
+      ],
+      title: "Employment Information",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "file",
+          name: "applicant_documents_supporting_documents",
+          title: "Bank Statements and Payslips",
+          description:
+            "Please upload your bank statements and payslips from the past 3 months.",
+          isRequired: true,
+          allowMultiple: false,
+          acceptedTypes: "image/png",
+          maxSize: 10_000,
+          sourceType: "camera",
+        },
+      ],
+      title: "Supporting Documents",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "signaturepad",
+          name: "signature",
+          title: "Signature",
+          description:
+            "I hereby consent to Get Verified and its authorized agents to access my credit information for the purpose of assessing my creditworthiness in relation to a rental agreement.<br /><br />I understand that this may involve obtaining my credit report from registered credit bureaus in accordance with the National Credit Act and the Protection of Personal Information Act (POPIA).",
+          isRequired: true,
+          placeholder: "Sign",
+        },
+      ],
+      title: "Consent",
+    },
+  ],
+  title: "Rental Application",
+};
+
 export const FORM_QUAY1_INTERNATIONAL_REALTY: IForm = {
   ...BASE_FORM,
   image: "/images/quay-1-international-realty.svg",
