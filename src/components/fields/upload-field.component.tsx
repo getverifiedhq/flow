@@ -175,7 +175,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
               secondaryAction={
                 x.isLoading ? (
                   <CircularProgress />
-                ) : (
+                ) : props.disabled ? null : (
                   <IconButton
                     onClick={() =>
                       setState({
@@ -189,7 +189,10 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                 )
               }
             >
-              <ListItemAvatar>
+              <ListItemAvatar
+                onClick={() => window.open(x.url, "_blank")}
+                sx={{ cursor: "pointer" }}
+              >
                 <Avatar sx={{ bgcolor: "white" }}>
                   <FileDownload />
                 </Avatar>
