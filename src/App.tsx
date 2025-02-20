@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainRoute } from "./routes";
+import { MainRoute, ThankYouRoute } from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -11,8 +11,16 @@ const router = createBrowserRouter([
     element: <MainRoute />,
   },
   {
-    path: "/:id",
+    path: "/:formId",
     element: <MainRoute />,
+  },
+  {
+    path: "/:formId/:id",
+    element: <MainRoute />,
+  },
+  {
+    path: "/:formId/:id/thank-you",
+    element: <ThankYouRoute />,
   },
 ]);
 

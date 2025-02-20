@@ -2,8 +2,9 @@ import { addDays, subYears } from "date-fns";
 import { IForm } from "./types";
 
 export const BASE_FORM: IForm = {
+  id: "",
   image: "",
-  payment: true,
+  payment: null,
   sections: [
     {
       description: null,
@@ -216,8 +217,11 @@ export const BASE_FORM: IForm = {
 };
 
 export const FORM_GET_VERIFIED: IForm = {
+  id: "get-verified",
   image: "/images/get-verified.png",
-  payment: true,
+  payment: {
+    amount: 225_00,
+  },
   sections: [
     {
       description: null,
@@ -359,11 +363,19 @@ export const FORM_GET_VERIFIED: IForm = {
 
 export const FORM_QUAY1_INTERNATIONAL_REALTY: IForm = {
   ...BASE_FORM,
+  id: "quay1-international-realty",
   image: "/images/quay-1-international-realty.svg",
+  payment: {
+    amount: 350_00,
+  },
 };
 
 export const FORM_REVO_PROPERTY: IForm = {
   ...BASE_FORM,
+  id: "revo-property",
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
+  payment: {
+    amount: 995_00,
+  },
 };
