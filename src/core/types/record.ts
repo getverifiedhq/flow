@@ -3,7 +3,7 @@ export type IRecord = {
   data: { [key: string]: any };
   disabled: boolean;
   id: string;
-  metadata: { [key: string]: string };
+  metadata: { [key: string]: string | undefined };
   payment: {
     transaction: {
       reference: string;
