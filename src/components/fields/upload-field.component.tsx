@@ -12,31 +12,18 @@ import {
   Typography,
 } from "@mui/material";
 import { Close, FileDownload } from "@mui/icons-material";
-import { fileToArrayBuffer, IFileField, uploadArrayBuffer } from "../../core";
+import {
+  fileToArrayBuffer,
+  IFieldProps,
+  IFileField,
+  uploadArrayBuffer,
+} from "../../core";
 
-export function UploadFieldComponent(props: {
-  field: IFileField;
-  onChange: (
-    files: Array<{
-      id: string;
-      name: string;
-      size: number;
-      type: string;
-      url: string;
-    }>
-  ) => void;
-  value: Array<{
-    id: string;
-    name: string;
-    size: number;
-    type: string;
-    url: string;
-  }>;
-}) {
+export function UploadFieldComponent(props: IFieldProps<IFileField>) {
   const inputElementFile = useRef(null as HTMLInputElement | null);
 
   const [state, setState] = useState({
-    files: props.value.map((x) => {
+    files: (props.value as Array<any>).map((x) => {
       return {
         isLoading: false,
         name: x.name,
@@ -59,19 +46,22 @@ export function UploadFieldComponent(props: {
   });
 
   useEffect(() => {
-    props.onChange(
-      state.files
-        .filter((x) => !x.isLoading)
-        .map((x) => {
-          return {
-            id: x.id,
-            name: x.name,
-            size: x.size,
-            type: x.type,
-            url: x.url,
-          };
-        })
-    );
+    props.handleChange({
+      target: {
+        name: props.field.name,
+        value: state.files
+          .filter((x) => !x.isLoading)
+          .map((x) => {
+            return {
+              id: x.id,
+              name: x.name,
+              size: x.size,
+              type: x.type,
+              url: x.url,
+            };
+          }),
+      },
+    });
   }, [state.files]);
 
   return (

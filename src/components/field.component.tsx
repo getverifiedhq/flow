@@ -13,28 +13,11 @@ import {
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, parseISO } from "date-fns";
 import SignatureCanvas from "react-signature-canvas";
-import { IField } from "../core";
+import { IField, IFieldProps } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 import { SearchableDropdownAsync } from "./fields/searchable-dropdown-async.component";
 
-export function FieldComponent(props: {
-  disabled: boolean;
-  error: boolean;
-  field: IField;
-  handleBlur: {
-    (e: React.FocusEvent<any, Element>): void;
-    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-  };
-  handleChange: {
-    (e: React.ChangeEvent<any>): void;
-    <T_1 = string | React.ChangeEvent<any>>(
-      field: T_1
-    ): T_1 extends React.ChangeEvent<any>
-      ? void
-      : (e: string | React.ChangeEvent<any>) => void;
-  };
-  value: any;
-}) {
+export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "dropdown") {
     if (props.field.choicesByUrl) {
       return (
@@ -79,15 +62,11 @@ export function FieldComponent(props: {
   if (props.field.type === "file") {
     return (
       <UploadFieldComponent
+        disabled={props.disabled}
+        error={props.error}
         field={props.field}
-        onChange={(files) =>
-          props.handleChange({
-            target: {
-              name: props.field.name,
-              value: files,
-            },
-          })
-        }
+        handleBlur={props.handleBlur}
+        handleChange={props.handleChange}
         value={props.value}
       />
     );

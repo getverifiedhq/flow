@@ -1,31 +1,10 @@
 import { Fragment, useMemo, useState } from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
+import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import { debounce } from "@mui/material/utils";
 import { useFetch } from "../../hooks";
-import { IDropdownField } from "../../core";
+import { IDropdownField, IFieldProps } from "../../core";
 
-type Item<T = object> = { [key: string]: string } & T;
-
-export function SearchableDropdownAsync<T>(props: {
-  disabled: boolean;
-  error: boolean;
-  field: IDropdownField;
-  handleBlur: {
-    (e: React.FocusEvent<any, Element>): void;
-    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-  };
-  handleChange: {
-    (e: React.ChangeEvent<any>): void;
-    <T_1 = string | React.ChangeEvent<any>>(
-      field: T_1
-    ): T_1 extends React.ChangeEvent<any>
-      ? void
-      : (e: string | React.ChangeEvent<any>) => void;
-  };
-  value: Item<T> | null;
-}) {
+export function SearchableDropdownAsync(props: IFieldProps<IDropdownField>) {
   const [open, setOpen] = useState(false);
 
   const result = useFetch({
