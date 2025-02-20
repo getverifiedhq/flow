@@ -47,33 +47,17 @@ export function FormComponent(props: {
                   data={props.data}
                   disabled={props.disabled}
                   onSubmit={async (x) => {
-                    if (index + 1 >= props.form.sections.length) {
-                      setActiveStep(activeStep + 1);
-
-                      if (!props.disabled) {
-                        await props.onSubmit(
-                          {
-                            ...props.data,
-                            ...x,
-                          },
-                          true
-                        );
-                      }
-
-                      return;
-                    }
-
-                    setActiveStep(activeStep + 1);
-
                     if (!props.disabled) {
                       await props.onSubmit(
                         {
                           ...props.data,
                           ...x,
                         },
-                        true
+                        index + 1 >= props.form.sections.length
                       );
                     }
+
+                    setActiveStep(activeStep + 1);
                   }}
                   section={section}
                 />

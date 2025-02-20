@@ -10,12 +10,23 @@ export function MainRoute() {
   const params = useParams();
 
   const fetch = useFetch({
-    auto: params.id ? true : false,
+    auto: true,
     dependencies: [params.id],
     fn: async (data: { [key: string]: any } | null): Promise<IRecord> => {
-      if (!data) {
-        const response = await axios.get<IRecord>(
-          `https://staging.api.getverified.co.za/api/v1/records/${params.id}`
+      if (params.id) {
+        if (!data) {
+          const response = await axios.get<IRecord>(
+            `https://staging.api.getverified.co.za/api/v1/records/${params.id}`
+          );
+
+          return response.data;
+        }
+
+        const response = await axios.put<IRecord>(
+          `https://staging.api.getverified.co.za/api/v1/records/${params.id}`,
+          {
+            data,
+          }
         );
 
         return response.data;
@@ -25,13 +36,13 @@ export function MainRoute() {
         ? await axios.put<IRecord>(
             `https://staging.api.getverified.co.za/api/v1/records/${fetch.result.id}`,
             {
-              data,
+              data: data || {},
             }
           )
         : await axios.post<IRecord>(
             "https://staging.api.getverified.co.za/api/v1/records",
             {
-              data,
+              data: data || {},
             }
           );
 
@@ -39,11 +50,15 @@ export function MainRoute() {
     },
   });
 
+  if (!fetch.result) {
+    return <></>;
+  }
+
   return (
     <>
       <FormComponent
-        disabled={fetch.result ? fetch.result.disabled : false}
-        data={fetch.result ? fetch.result.data || {} : {}}
+        disabled={fetch.result.disabled}
+        data={fetch.result.data}
         form={FORM}
         onSubmit={async (data, submit: boolean) => {
           await fetch.fetch(data);
