@@ -4,7 +4,9 @@ import { debounce } from "@mui/material/utils";
 import { useFetch } from "../../hooks";
 import { IDropdownField, IFieldProps } from "../../core";
 
-export function SearchableDropdownAsync(props: IFieldProps<IDropdownField>) {
+export function SearchableDropdownAsyncComponent(
+  props: IFieldProps<IDropdownField>
+) {
   const [open, setOpen] = useState(false);
 
   const result = useFetch({

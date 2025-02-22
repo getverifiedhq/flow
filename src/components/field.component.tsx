@@ -15,13 +15,13 @@ import { format, parseISO } from "date-fns";
 import SignatureCanvas from "react-signature-canvas";
 import { IField, IFieldProps } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
-import { SearchableDropdownAsync } from "./fields/searchable-dropdown-async.component";
+import { SearchableDropdownAsyncComponent } from "./fields/searchable-dropdown-async.component";
 
 export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "dropdown") {
     if (props.field.choicesByUrl) {
       return (
-        <SearchableDropdownAsync
+        <SearchableDropdownAsyncComponent
           disabled={props.disabled}
           error={props.error}
           field={props.field}
