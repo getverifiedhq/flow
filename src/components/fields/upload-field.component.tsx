@@ -11,7 +11,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { Close, FileDownload } from "@mui/icons-material";
+import { Close, FileDownloadOutlined, WarningAmber } from "@mui/icons-material";
 import {
   fileToArrayBuffer,
   IFieldProps,
@@ -25,6 +25,8 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
   const [state, setState] = useState({
     files: (props.value as Array<any>).map((x) => {
       return {
+        id: x.id,
+        isError: false,
         isLoading: false,
         name: x.name,
         size: x.size,
@@ -36,6 +38,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
   } as {
     files: Array<{
       id: string;
+      isError: boolean;
       isLoading: boolean;
       name: string;
       size: number;
@@ -50,7 +53,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
       target: {
         name: props.field.name,
         value: state.files
-          .filter((x) => !x.isLoading)
+          .filter((x) => !x.isError && !x.isLoading)
           .map((x) => {
             return {
               id: x.id,
@@ -131,6 +134,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                   ...previousState.files,
                   {
                     id,
+                    isError: false,
                     isLoading: true,
                     name: file.name,
                     size: file.size,
@@ -149,6 +153,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                   return {
                     files: previousState.files.map((x) => {
                       if (x.id === id) {
+                        x.isError = true; // TODO
                         x.isLoading = false;
                         x.url = url;
                       }
@@ -194,7 +199,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                 sx={{ cursor: "pointer" }}
               >
                 <Avatar sx={{ bgcolor: "white" }}>
-                  <FileDownload />
+                  {x.isError ? <WarningAmber /> : <FileDownloadOutlined />}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
