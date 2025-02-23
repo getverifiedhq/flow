@@ -1,61 +1,28 @@
-import { useEffect, useRef, useState } from "react";
 import {
-  Box,
   FormControl,
   InputAdornment,
   InputLabel,
-  MenuItem,
   OutlinedInput,
-  Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format, parseISO } from "date-fns";
-import SignatureCanvas from "react-signature-canvas";
 import { IField, IFieldProps } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
-import { SearchableDropdownAsyncComponent } from "./fields/searchable-dropdown-async.component";
+import { DropdownComponent } from "./fields/dropdown.component";
+import { SignaturePadComponent } from "./fields/signature-pad.component";
 
 export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "dropdown") {
-    if (props.field.choicesByUrl) {
-      return (
-        <SearchableDropdownAsyncComponent
-          disabled={props.disabled}
-          error={props.error}
-          field={props.field}
-          handleBlur={props.handleBlur}
-          handleChange={props.handleChange}
-          value={props.value}
-        />
-      );
-    }
-
     return (
-      <FormControl fullWidth sx={{ mb: 2 }}>
-        <InputLabel shrink>{props.field.title}</InputLabel>
-        <Select
-          disabled={props.disabled}
-          error={props.error}
-          id={props.field.name}
-          label={props.field.title}
-          name={props.field.name}
-          notched
-          onBlur={props.handleBlur}
-          onChange={props.handleChange}
-          value={props.value}
-        >
-          {(props.field.choicesOrder
-            ? props.field.choices.sort()
-            : props.field.choices
-          ).map((x, index: number) => (
-            <MenuItem key={index} value={x}>
-              {x}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <DropdownComponent
+        disabled={props.disabled}
+        error={props.error}
+        field={props.field}
+        handleBlur={props.handleBlur}
+        handleChange={props.handleChange}
+        value={props.value}
+      />
     );
   }
 
@@ -73,48 +40,15 @@ export function FieldComponent(props: IFieldProps<IField>) {
   }
 
   if (props.field.type === "signaturepad") {
-    const refBox = useRef(null as HTMLDivElement | null);
-
-    const refSignatureCanvas = useRef(null as SignatureCanvas | null);
-
-    const [_, setState] = useState(false);
-
-    useEffect(() => {
-      setState(true);
-    }, [refBox]);
-
     return (
-      <>
-        <Typography component="div" sx={{ mb: 2 }} variant="body1">
-          <article
-            dangerouslySetInnerHTML={{ __html: props.field.description || "" }}
-          ></article>
-        </Typography>
-        <Box ref={refBox} sx={{ mb: 2 }}>
-          {refBox && refBox.current ? (
-            <SignatureCanvas
-              backgroundColor="#f9f9f9"
-              canvasProps={{
-                height: Math.floor(refBox.current.clientWidth / 2),
-                style: { borderRadius: "0.5rem" },
-                width: refBox.current.clientWidth,
-              }}
-              onEnd={() =>
-                props.handleChange({
-                  target: {
-                    name: props.field.name,
-                    value: refSignatureCanvas.current?.isEmpty()
-                      ? ""
-                      : refSignatureCanvas.current?.toDataURL("image/png"),
-                  },
-                })
-              }
-              penColor="black"
-              ref={refSignatureCanvas}
-            />
-          ) : null}
-        </Box>
-      </>
+      <SignaturePadComponent
+        disabled={props.disabled}
+        error={props.error}
+        field={props.field}
+        handleBlur={props.handleBlur}
+        handleChange={props.handleChange}
+        value={props.value}
+      />
     );
   }
 
