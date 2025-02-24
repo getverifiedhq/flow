@@ -197,7 +197,19 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
               secondaryAction={
                 x.isLoading ? (
                   <CircularProgress />
-                ) : props.disabled ? null : (
+                ) : props.disabled ? null : x.isError ? (
+                  <IconButton
+                    color="warning"
+                    onClick={() =>
+                      setState({
+                        files: state.files.filter((y) => y.id !== x.id),
+                        isLoading: state.isLoading,
+                      })
+                    }
+                  >
+                    <WarningAmber />
+                  </IconButton>
+                ) : (
                   <IconButton
                     onClick={() =>
                       setState({
@@ -216,7 +228,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                 sx={{ cursor: "pointer" }}
               >
                 <Avatar sx={{ bgcolor: "white" }}>
-                  {x.isError ? <WarningAmber /> : <FileDownloadOutlined />}
+                  <FileDownloadOutlined />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
