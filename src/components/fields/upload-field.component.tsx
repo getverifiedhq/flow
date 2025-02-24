@@ -148,14 +148,31 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
 
             fileToArrayBuffer(file)
               .then((arrayBuffer) => uploadArrayBuffer(arrayBuffer, file.type))
-              .then((url) =>
+              .then((result) =>
                 setState((previousState) => {
                   return {
                     files: previousState.files.map((x) => {
                       if (x.id === id) {
-                        x.isError = false; // TODO
+                        x.isError = !result.tags.some((y) =>
+                          props.field.tags.includes(y)
+                        );
                         x.isLoading = false;
-                        x.url = url;
+                        x.url = result.url;
+                      }
+
+                      return x;
+                    }),
+                    isLoading: previousState.files.some((x) => x.isLoading),
+                  };
+                })
+              )
+              .catch(() =>
+                setState((previousState) => {
+                  return {
+                    files: previousState.files.map((x) => {
+                      if (x.id === id) {
+                        x.isError = true;
+                        x.isLoading = false;
                       }
 
                       return x;

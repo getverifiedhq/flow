@@ -61,7 +61,7 @@ export function buildValidationSchema(fields: Array<IField>) {
         return dict;
       }
 
-      if (x.type === "signaturepad") {
+      if (x.type === "signature-pad") {
         let schema = Yup.string();
 
         if (x.isRequired) {

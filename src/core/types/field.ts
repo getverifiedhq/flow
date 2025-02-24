@@ -1,8 +1,8 @@
 export type IBaseField = {
-  name: string;
-  title: string;
   description?: string;
   isRequired: boolean;
+  name: string;
+  title: string;
 };
 
 export type IDropdownField = IBaseField & {
@@ -20,17 +20,13 @@ export type IDropdownField = IBaseField & {
 
 export type IFileField = IBaseField & {
   type: "file";
-  allowMultiple: boolean;
-  acceptedTypes: string;
-  maxSize: number;
   sourceType: "camera" | "file" | "file-camera";
+  tags: Array<string>;
 };
 
 export type ISignaturePadField = IBaseField & {
-  type: "signaturepad";
+  type: "signature-pad";
   placeholder: string;
-  // penColor: string;
-  // dataFormat: "jpg" | "png";
 };
 
 export type ITextField = IBaseField & {

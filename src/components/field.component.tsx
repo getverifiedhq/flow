@@ -39,7 +39,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
     );
   }
 
-  if (props.field.type === "signaturepad") {
+  if (props.field.type === "signature-pad") {
     return (
       <SignaturePadComponent
         disabled={props.disabled}

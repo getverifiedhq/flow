@@ -74,8 +74,8 @@ export function fileToCanvas(
 export async function uploadArrayBuffer(
   arrayBuffer: ArrayBuffer,
   contentType: string
-) {
-  const response = await axios.post<{ url: string }>(
+): Promise<{ tags: Array<string>; url: string }> {
+  const response = await axios.post<{ tags: Array<string>; url: string }>(
     `https://staging.api.getverified.co.za/api/v1/storage`,
     arrayBuffer,
     {
@@ -85,5 +85,5 @@ export async function uploadArrayBuffer(
     }
   );
 
-  return response.data.url;
+  return response.data;
 }

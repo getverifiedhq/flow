@@ -141,12 +141,10 @@ export const BASE_FORM: IForm = {
           type: "file",
           name: "applicant_documents_identity_document",
           title: "Identity Document",
+          tags: ["identity-document"],
           description:
             "Please upload a photo of your identity document such as your South African Smart ID Card, Green ID Book or Passport.",
           isRequired: true,
-          allowMultiple: false,
-          acceptedTypes: "image/png",
-          maxSize: 10_000,
           sourceType: "camera",
         },
       ],
@@ -186,12 +184,10 @@ export const BASE_FORM: IForm = {
           type: "file",
           name: "applicant_documents_supporting_documents",
           title: "Bank Statements and Payslips",
+          tags: ["bank-statement", "payslip"],
           description:
             "Please upload your bank statements and payslips from the past 3 months.",
           isRequired: true,
-          allowMultiple: false,
-          acceptedTypes: "image/png",
-          maxSize: 10_000,
           sourceType: "camera",
         },
       ],
@@ -201,7 +197,7 @@ export const BASE_FORM: IForm = {
       description: null,
       fields: [
         {
-          type: "signaturepad",
+          type: "signature-pad",
           name: "signature",
           title: "Signature",
           description:
@@ -289,9 +285,7 @@ export const FORM_GET_VERIFIED: IForm = {
           description:
             "Please upload a photo of your identity document such as your South African Smart ID Card, Green ID Book or Passport.",
           isRequired: true,
-          allowMultiple: false,
-          acceptedTypes: "image/png",
-          maxSize: 10_000,
+          tags: ["identity-document"],
           sourceType: "camera",
         },
       ],
@@ -331,12 +325,10 @@ export const FORM_GET_VERIFIED: IForm = {
           type: "file",
           name: "applicant_documents_supporting_documents",
           title: "Bank Statements and Payslips",
+          tags: ["bank-statement", "payslip"],
           description:
             "Please upload your bank statements and payslips from the past 3 months.",
           isRequired: true,
-          allowMultiple: false,
-          acceptedTypes: "image/png",
-          maxSize: 10_000,
           sourceType: "camera",
         },
       ],
@@ -346,7 +338,7 @@ export const FORM_GET_VERIFIED: IForm = {
       description: null,
       fields: [
         {
-          type: "signaturepad",
+          type: "signature-pad",
           name: "signature",
           title: "Signature",
           description:

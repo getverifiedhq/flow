@@ -163,7 +163,8 @@ export function UploadPhotoFieldComponent(props: {
             htmlCanvasElement
           );
 
-          const url: string = await uploadArrayBuffer(arrayBuffer, file.type);
+          const url: string = (await uploadArrayBuffer(arrayBuffer, file.type))
+            .url;
 
           setState({
             error: null,
