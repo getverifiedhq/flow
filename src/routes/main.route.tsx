@@ -113,6 +113,7 @@ export function MainRoute() {
                   callback_url: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
                   metadata: {
                     reference: fetch.result.id,
+                    url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
                     workflow: form.result.id,
                   },
                 },
