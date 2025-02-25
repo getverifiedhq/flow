@@ -98,7 +98,7 @@ export function MainRoute() {
             if (fetch.result.payment) {
               // TODO: call webhook or submit document becuase it will be in edit mode
               // TODO: change to router
-              window.location.href = `${window.location.origin}/${params.formId}/${fetch.result.id}/thank-you`;
+              window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
 
               return;
             }
@@ -110,10 +110,10 @@ export function MainRoute() {
                   amount: form.result.payment.amount,
                   channels: ["card"],
                   email: data["applicant_email_address"],
-                  callback_url: `${window.location.origin}/${params.formId}/${fetch.result.id}/thank-you`,
+                  callback_url: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
                   metadata: {
                     reference: fetch.result.id,
-                    workflow: params.formId,
+                    workflow: form.result.id,
                   },
                 },
                 {
@@ -130,7 +130,7 @@ export function MainRoute() {
 
             // TODO: call webhook or submit document becuase it will be in edit mode
             // TODO: change to router
-            window.location.href = `${window.location.origin}/${params.formId}/${fetch.result.id}/thank-you`;
+            window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
           }
         }}
       />
