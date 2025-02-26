@@ -153,11 +153,12 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                   return {
                     files: previousState.files.map((x) => {
                       if (x.id === id) {
-                        x.isError = props.field.tags.length
-                          ? !result.tags.some((y) =>
-                              props.field.tags.includes(y)
-                            )
-                          : false;
+                        x.isError =
+                          props.field.tags.length && result.tags.length
+                            ? !result.tags.some((y) =>
+                                props.field.tags.includes(y)
+                              )
+                            : false;
                         x.isLoading = false;
                         x.url = result.url;
                       }
