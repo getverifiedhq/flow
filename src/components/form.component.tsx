@@ -16,7 +16,7 @@ export function FormComponent(props: {
   form: IForm;
   onSubmit: (data: { [key: string]: string }, submit: boolean) => Promise<void>;
 }) {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   return (
     <>

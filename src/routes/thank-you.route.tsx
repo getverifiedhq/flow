@@ -1,11 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import {
-  FORM_GET_VERIFIED,
-  FORM_QUAY1_INTERNATIONAL_REALTY,
-  FORM_REVO_PROPERTY,
-  IForm,
-} from "../core";
+import { FORMS, IForm } from "../core";
 import { useFetch } from "../hooks";
 
 export function ThankYouRoute() {
@@ -14,15 +9,13 @@ export function ThankYouRoute() {
   const form = useFetch({
     auto: true,
     dependencies: [params.formId],
-    fn: async (): Promise<IForm> => {
+    fn: async (): Promise<IForm | null> => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       return (
-        [
-          FORM_GET_VERIFIED,
-          FORM_REVO_PROPERTY,
-          FORM_QUAY1_INTERNATIONAL_REALTY,
-        ].find((x) => x.id === params.formId) || FORM_REVO_PROPERTY
+        FORMS.find((x) => x.id === params.formId) ||
+        FORMS.find((x) => x.id === "revo-property") ||
+        null
       );
     },
   });
