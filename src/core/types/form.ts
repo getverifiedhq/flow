@@ -3,7 +3,7 @@ import { ISection } from "./section";
 export type IForm = {
   id: string;
 
-  image: string;
+  image: string | null;
 
   payment: {
     amount: number;
@@ -11,5 +11,5 @@ export type IForm = {
 
   sections: Array<ISection>;
 
-  title: string;
+  title: string | null;
 };

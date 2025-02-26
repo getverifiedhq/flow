@@ -21,15 +21,23 @@ export function FormComponent(props: {
   return (
     <>
       <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-          <img height={40} src={props.form.image} />
-        </Box>
+        {props.form.image ? (
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+            <img height={40} src={props.form.image} />
+          </Box>
+        ) : null}
 
-        <Typography sx={{ mb: 4, textAlign: "center" }} variant="h5">
-          {props.form.title}
-        </Typography>
+        {props.form.title ? (
+          <Typography sx={{ mb: 4, textAlign: "center" }} variant="h5">
+            {props.form.title}
+          </Typography>
+        ) : null}
 
-        <Stepper activeStep={activeStep} orientation="vertical" sx={{ mb: 6 }}>
+        <Stepper
+          activeStep={activeStep}
+          orientation="vertical"
+          sx={{ mb: 6, mt: props.form.title ? 0 : 4 }}
+        >
           {props.form.sections.map((section, index: number) => (
             <Step key={index}>
               <StepLabel

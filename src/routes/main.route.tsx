@@ -1,7 +1,11 @@
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FormComponent } from "../components/form.component";
-import { FORMS, IForm, IRecord } from "../core";
+import { FORMS, IForm, IRecord, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function MainRoute() {
@@ -15,7 +19,7 @@ export function MainRoute() {
 
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "revo-property") ||
+        FORMS.find((x) => x.id === "get-verified") ||
         null
       );
     },
@@ -75,58 +79,63 @@ export function MainRoute() {
 
   return (
     <>
-      <FormComponent
-        disabled={fetch.result.disabled}
-        data={fetch.result.data}
-        form={form.result}
-        onSubmit={async (data, submit: boolean) => {
-          await fetch.fetch(data);
+      <ThemeProvider theme={THEMES[form.result.id]}>
+        <CssBaseline />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <FormComponent
+            disabled={fetch.result.disabled}
+            data={fetch.result.data}
+            form={form.result}
+            onSubmit={async (data, submit: boolean) => {
+              await fetch.fetch(data);
 
-          if (!form.result) {
-            return;
-          }
+              if (!form.result) {
+                return;
+              }
 
-          if (fetch.result && submit) {
-            if (fetch.result.payment) {
-              // TODO: call webhook or submit document becuase it will be in edit mode
-              // TODO: change to router
-              window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
+              if (fetch.result && submit) {
+                if (fetch.result.payment) {
+                  // TODO: call webhook or submit document becuase it will be in edit mode
+                  // TODO: change to router
+                  window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
 
-              return;
-            }
-
-            if (form.result.payment) {
-              const response = await axios.post(
-                "https://api.paystack.co/transaction/initialize",
-                {
-                  amount: form.result.payment.amount,
-                  channels: ["card"],
-                  email: data["applicant_email_address"],
-                  callback_url: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
-                  metadata: {
-                    reference: fetch.result.id,
-                    url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
-                    workflow: form.result.id,
-                  },
-                },
-                {
-                  headers: {
-                    authorization: `Bearer sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993`,
-                  },
+                  return;
                 }
-              );
 
-              window.location.href = response.data.data.authorization_url;
+                if (form.result.payment) {
+                  const response = await axios.post(
+                    "https://api.paystack.co/transaction/initialize",
+                    {
+                      amount: form.result.payment.amount,
+                      channels: ["card"],
+                      email: data["applicant_email_address"],
+                      callback_url: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
+                      metadata: {
+                        reference: fetch.result.id,
+                        url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
+                        workflow: form.result.id,
+                      },
+                    },
+                    {
+                      headers: {
+                        authorization: `Bearer sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993`,
+                      },
+                    }
+                  );
 
-              return;
-            }
+                  window.location.href = response.data.data.authorization_url;
 
-            // TODO: call webhook or submit document becuase it will be in edit mode
-            // TODO: change to router
-            window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
-          }
-        }}
-      />
+                  return;
+                }
+
+                // TODO: call webhook or submit document becuase it will be in edit mode
+                // TODO: change to router
+                window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
+              }
+            }}
+          />
+        </LocalizationProvider>
+      </ThemeProvider>
     </>
   );
 }
