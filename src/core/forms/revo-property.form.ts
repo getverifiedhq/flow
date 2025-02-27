@@ -18,17 +18,11 @@ export const FORM_REVO_PROPERTY: IForm = {
           title: "Which property are you applying for?",
           isRequired: true,
           placeholder: "Start typing...",
-          choices: [
-            "14 Milton Rd, Sea Point, Cape Town, 8060, South Africa",
-            "37 Hely Hutchinson Ave, Bakoven, Cape Town, 8005, South Africa",
-            "47 Main Rd, Green Point, Cape Town, 8051, South Africa",
-            "63 Blaauwberg Rd, Table View, Cape Town, 7439, South Africa",
-          ],
           choicesByUrl: {
             path: "",
-            titleName: "label",
-            url: "",
-            valueName: "id",
+            titleName: "Display Name",
+            url: "https://staging.api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Listings",
+            valueName: "Address",
           },
         },
         {
@@ -52,16 +46,12 @@ export const FORM_REVO_PROPERTY: IForm = {
           name: "agent",
           title: "Which rental agent have you been in touch with?",
           isRequired: true,
-          choices: [
-            "Steve",
-            "Nicole",
-            "Andre",
-            "Tatum",
-            "Retha",
-            "JP",
-            "Kelly",
-          ],
-          choicesOrder: "asc",
+          choicesByUrl: {
+            path: "",
+            titleName: "Name",
+            url: "https://staging.api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Agents",
+            valueName: "Email Address",
+          },
         },
         {
           type: "dropdown",

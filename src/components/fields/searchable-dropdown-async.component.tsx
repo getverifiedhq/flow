@@ -1,6 +1,7 @@
 import { Fragment, useMemo, useState } from "react";
 import { Autocomplete, CircularProgress, TextField } from "@mui/material";
 import { debounce } from "@mui/material/utils";
+import axios from "axios";
 import { useFetch } from "../../hooks";
 import { IDropdownField, IFieldProps } from "../../core";
 
@@ -12,22 +13,39 @@ export function SearchableDropdownAsyncComponent(
   const result = useFetch({
     auto: false,
     dependencies: [open],
-    fn: async (value: string | null) =>
-      props.field.choices
-        .filter((x) => !value || x.toLowerCase().includes(value.toLowerCase()))
-        .map((x) => {
-          return {
-            id: x,
-            label: x,
-          } as any;
-        }),
+    // fn: async (value: string | null) =>
+    //   props.field.choices
+    //     .filter((x) => !value || x.toLowerCase().includes(value.toLowerCase()))
+    //     .map((x) => {
+    //       return {
+    //         id: x,
+    //         label: x,
+    //       } as any;
+    //     }),
+    fn: async (value: string | null) => {
+      if (!props.field.choicesByUrl) {
+        return [];
+      }
+      const response = await axios.get<Array<any>>(
+        props.field.choicesByUrl.url
+      );
+
+      return response.data.filter(
+        (x) =>
+          !value ||
+          (props.field.choicesByUrl &&
+            x[props.field.choicesByUrl.titleName]
+              .toLowerCase()
+              .includes(value.toLowerCase()))
+      );
+    },
   });
 
   const handleOnInputChange = useMemo(
     () =>
       debounce((value) => {
         result.fetch(value);
-      }, 400),
+      }, 1000),
     [result]
   );
 

@@ -31,8 +31,8 @@ export function DropdownComponent(props: IFieldProps<IDropdownField>) {
         value={props.value}
       >
         {(props.field.choicesOrder
-          ? props.field.choices.sort()
-          : props.field.choices
+          ? (props.field.choices || []).sort()
+          : props.field.choices || []
         ).map((x, index: number) => (
           <MenuItem key={index} value={x}>
             {x}

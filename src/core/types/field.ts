@@ -7,7 +7,7 @@ export type IBaseField = {
 
 export type IDropdownField = IBaseField & {
   type: "dropdown";
-  choices: Array<string>;
+  choices?: Array<string>;
   choicesByUrl?: {
     url: string;
     path: string;
