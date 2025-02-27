@@ -19,6 +19,13 @@ export const FORM_SAMPLE: IForm = {
           isRequired: true,
           sourceType: "camera",
         },
+        {
+          type: "photo",
+          name: "applicant_documents_photo",
+          title: "Photo",
+          description: "Please upload a photo of yourself",
+          isRequired: true,
+        },
       ],
       title: "Identity Verification",
     },

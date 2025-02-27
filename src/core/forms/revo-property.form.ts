@@ -150,6 +150,13 @@ export const FORM_REVO_PROPERTY: IForm = {
           isRequired: true,
           sourceType: "camera",
         },
+        {
+          type: "photo",
+          name: "applicant_documents_photo",
+          title: "Photo",
+          description: "Please upload a photo of yourself",
+          isRequired: true,
+        },
       ],
       title: "Identity Verification",
     },
@@ -195,6 +202,40 @@ export const FORM_REVO_PROPERTY: IForm = {
         },
       ],
       title: "Supporting Documents",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "text",
+          name: "applicant_reference_address",
+          title: "Current or most recent address",
+          isRequired: true,
+          placeholder:
+            "Unit B22, 14 Milton Road, Sea Point, Cape Town, 8060, South Africa",
+        },
+        {
+          type: "text",
+          name: "applicant_reference_contact_name",
+          title: "Name of Landlord/Agency",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "applicant_reference_contact_email_address",
+          title: "Email Address of Landlord/Agency",
+          isRequired: true,
+          inputType: "email",
+        },
+        {
+          type: "text",
+          name: "applicant_reference_contact_mobile_number",
+          title: "Mobile Number of Landlord/Agency",
+          isRequired: true,
+          inputType: "tel",
+        },
+      ],
+      title: "Reference",
     },
     {
       description: null,

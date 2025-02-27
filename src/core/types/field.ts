@@ -24,6 +24,10 @@ export type IFileField = IBaseField & {
   tags: Array<string>;
 };
 
+export type IPhotoField = IBaseField & {
+  type: "photo";
+};
+
 export type ISignaturePadField = IBaseField & {
   type: "signature-pad";
   placeholder: string;
@@ -45,5 +49,6 @@ export type ITextField = IBaseField & {
 export type IField =
   | IDropdownField
   | IFileField
+  | IPhotoField
   | ISignaturePadField
   | ITextField;

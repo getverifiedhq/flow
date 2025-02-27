@@ -17,7 +17,7 @@ export function ThankYouRoute() {
 
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "get-verified") ||
+        FORMS.find((x) => x.id === "revo-property") ||
         null
       );
     },
