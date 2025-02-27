@@ -241,6 +241,38 @@ export const FORM_REVO_PROPERTY: IForm = {
       description: null,
       fields: [
         {
+          type: "text",
+          name: "guarantor_first_name",
+          title: "First Name",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "guarantor_last_name",
+          title: "Last Name",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "guarantor_email_address",
+          title: "Email Address",
+          isRequired: true,
+          inputType: "email",
+        },
+        {
+          type: "text",
+          name: "guarantor_mobile_number",
+          title: "Mobile Number",
+          isRequired: true,
+          inputType: "tel",
+        },
+      ],
+      title: "Guarantor",
+    },
+    {
+      description: null,
+      fields: [
+        {
           type: "signature-pad",
           name: "signature",
           title: "Signature",
