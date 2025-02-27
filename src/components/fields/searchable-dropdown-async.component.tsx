@@ -12,7 +12,7 @@ export function SearchableDropdownAsyncComponent(
 
   const result = useFetch({
     auto: false,
-    dependencies: [open],
+    dependencies: [],
     // fn: async (value: string | null) =>
     //   props.field.choices
     //     .filter((x) => !value || x.toLowerCase().includes(value.toLowerCase()))
@@ -46,7 +46,7 @@ export function SearchableDropdownAsyncComponent(
       debounce((value) => {
         result.fetch(value);
       }, 1000),
-    [result]
+    []
   );
 
   return (
@@ -56,6 +56,12 @@ export function SearchableDropdownAsyncComponent(
       filterOptions={(x) => x}
       fullWidth
       id={props.field.name}
+      isOptionEqualToValue={(option, value) =>
+        props.field.choicesByUrl
+          ? option[props.field.choicesByUrl.valueName] ===
+            value[props.field.choicesByUrl.valueName]
+          : false
+      }
       open={open}
       // onBlur={props.handleBlur}
       onOpen={() => {
@@ -64,13 +70,6 @@ export function SearchableDropdownAsyncComponent(
         result.fetch(null);
       }}
       onClose={() => setOpen(false)}
-      value={props.value}
-      isOptionEqualToValue={(option, value) =>
-        props.field.choicesByUrl
-          ? option[props.field.choicesByUrl.valueName] ===
-            value[props.field.choicesByUrl.valueName]
-          : false
-      }
       getOptionLabel={(option) =>
         props.field.choicesByUrl
           ? option[props.field.choicesByUrl.titleName]
@@ -89,7 +88,10 @@ export function SearchableDropdownAsyncComponent(
           },
         });
       }}
-      onInputChange={(_, value) => handleOnInputChange(value)}
+      onInputChange={(_, value, reason) =>
+        ["input"].includes(reason) ? handleOnInputChange(value) : null
+      }
+      value={props.value}
       renderInput={(params) => (
         <TextField
           {...params}
