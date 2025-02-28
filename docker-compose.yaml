@@ -38,16 +38,21 @@ services:
       - proxy_network
 
   flow:
-    image: ghcr.io/getverifiedhq/ui:main
+    image: ghcr.io/getverifiedhq/flow:main
     container_name: flow
     restart: unless-stopped
     environment:
-      - LETSENCRYPT_HOST=demo.getverified.co.za
-      - HOST=demo.getverified.co.za
-      - VIRTUAL_HOST=demo.getverified.co.za
+      - LETSENCRYPT_HOST=secure.getverified.co.za
+      - HOST=secure.getverified.co.za
+      - VIRTUAL_HOST=secure.getverified.co.za
       - VIRTUAL_PORT=80
     networks:
       - proxy_network
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   proxy_network:

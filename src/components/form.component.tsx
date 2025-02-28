@@ -23,7 +23,7 @@ export function FormComponent(props: {
       <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>
         {props.form.image ? (
           <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-            <img height={40} src={props.form.image} />
+            <img height={24} src={props.form.image} />
           </Box>
         ) : null}
 
