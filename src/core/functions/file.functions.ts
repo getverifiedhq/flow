@@ -76,7 +76,7 @@ export async function uploadArrayBuffer(
   contentType: string
 ): Promise<{ tags: Array<string>; url: string }> {
   const response = await axios.post<{ tags: Array<string>; url: string }>(
-    `https://staging.api.getverified.co.za/api/v1/storage`,
+    `https://api.getverified.co.za/api/v1/storage`,
     arrayBuffer,
     {
       headers: {

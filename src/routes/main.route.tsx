@@ -32,14 +32,14 @@ export function MainRoute() {
       if (params.id) {
         if (!data) {
           const response = await axios.get<IRecord>(
-            `https://staging.api.getverified.co.za/api/v1/records/${params.id}`
+            `https://api.getverified.co.za/api/v1/records/${params.id}`
           );
 
           return response.data;
         }
 
         const response = await axios.put<IRecord>(
-          `https://staging.api.getverified.co.za/api/v1/records/${params.id}`,
+          `https://api.getverified.co.za/api/v1/records/${params.id}`,
           {
             data,
           }
@@ -50,13 +50,13 @@ export function MainRoute() {
 
       const response = fetch.result
         ? await axios.put<IRecord>(
-            `https://staging.api.getverified.co.za/api/v1/records/${fetch.result.id}`,
+            `https://api.getverified.co.za/api/v1/records/${fetch.result.id}`,
             {
               data: data || {},
             }
           )
         : await axios.post<IRecord>(
-            "https://staging.api.getverified.co.za/api/v1/records",
+            "https://api.getverified.co.za/api/v1/records",
             {
               data: data || {},
               metadata: {

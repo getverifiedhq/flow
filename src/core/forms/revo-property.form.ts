@@ -21,7 +21,7 @@ export const FORM_REVO_PROPERTY: IForm = {
           choicesByUrl: {
             path: "",
             titleName: "Display Name",
-            url: "https://staging.api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Listings",
+            url: "https://api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Listings",
             valueName: "Address",
           },
         },
@@ -49,7 +49,7 @@ export const FORM_REVO_PROPERTY: IForm = {
           choicesByUrl: {
             path: "",
             titleName: "Name",
-            url: "https://staging.api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Agents",
+            url: "https://api.getverified.co.za/api/v1/google/sheets/1_3UVauf8_w-miT2b_mCX9T-19j5psAXaZOnh6NFeT9A?name=Agents",
             valueName: "Email Address",
           },
         },
