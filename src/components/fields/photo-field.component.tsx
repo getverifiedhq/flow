@@ -103,6 +103,7 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
           alignItems: "center",
           backgroundColor: "#f9f9f9",
           border: "2px dashed rgba(18, 35, 69, .15)",
+          borderColor: props.error ? "error.main" : undefined,
           borderRadius: 2,
           cursor: "pointer",
           display: "flex",
@@ -261,7 +262,7 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
                 onClick={() => window.open(x.url, "_blank")}
                 sx={{ cursor: "pointer" }}
               >
-                <Avatar sx={{ bgcolor: "white" }}>
+                <Avatar sx={{ bgcolor: "primary.main" }}>
                   <FileDownloadOutlined />
                 </Avatar>
               </ListItemAvatar>
