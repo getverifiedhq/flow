@@ -93,6 +93,8 @@ export const FORM_GET_VERIFIED: IForm = {
           type: "signature-pad",
           name: "signature",
           title: "Signature",
+          description:
+            "hereby consent to Get Verified and its authorized agents to access my credit information for the purpose of assessing my creditworthiness in relation to a rental agreement.",
           isRequired: true,
           placeholder: "Sign",
         },
@@ -100,5 +102,5 @@ export const FORM_GET_VERIFIED: IForm = {
       title: "Consent",
     },
   ],
-  title: "Application",
+  title: "Rental Application",
 };
