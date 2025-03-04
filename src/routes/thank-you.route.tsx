@@ -13,11 +13,11 @@ export function ThankYouRoute() {
     auto: true,
     dependencies: [params.formId],
     fn: async (): Promise<IForm | null> => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
 
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "revo-property") ||
+        FORMS.find((x) => x.id === "get-verified") ||
         null
       );
     },

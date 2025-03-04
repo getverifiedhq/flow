@@ -19,7 +19,7 @@ export function MainRoute() {
 
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "revo-property") ||
+        FORMS.find((x) => x.id === "get-verified") ||
         null
       );
     },
