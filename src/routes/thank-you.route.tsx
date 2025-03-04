@@ -35,7 +35,7 @@ export function ThankYouRoute() {
           <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>
             {form.result.image ? (
               <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-                <img height={40} src={form.result.image} />
+                <img height={24} src={form.result.image} />
               </Box>
             ) : null}
 
