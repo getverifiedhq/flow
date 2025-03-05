@@ -87,6 +87,32 @@ export const FORM_GET_VERIFIED: IForm = {
       title: "Identity Verification",
     },
     {
+      description: "Who should receive your credit report?",
+      fields: [
+        {
+          type: "text",
+          name: "recipient_name",
+          title: "Name",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "recipient_email_address",
+          title: "Email Address",
+          isRequired: true,
+          inputType: "email",
+        },
+        {
+          type: "text",
+          name: "recipient_mobile_number",
+          title: "Mobile Number",
+          isRequired: true,
+          inputType: "tel",
+        },
+      ],
+      title: "Recipient",
+    },
+    {
       description: null,
       fields: [
         {
