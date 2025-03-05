@@ -201,7 +201,9 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
                   };
                 })
               )
-              .catch(() =>
+              .catch((error) => {
+                alert(error.message);
+
                 setState((previousState) => {
                   return {
                     files: previousState.files.map((x) => {
@@ -214,8 +216,8 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
                     }),
                     isLoading: previousState.files.some((x) => x.isLoading),
                   };
-                })
-              );
+                });
+              });
           }
         }}
         ref={inputElementFile}

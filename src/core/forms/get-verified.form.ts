@@ -94,7 +94,7 @@ export const FORM_GET_VERIFIED: IForm = {
           name: "signature",
           title: "Signature",
           description:
-            "I hereby consent to Get Verified and its authorized agents to access my credit information for the purpose of assessing my creditworthiness in relation to a rental agreement.",
+            "I, hereby consent to <b>Get Verified</b> and its authorized agents to access my credit information for the purpose of assessing my creditworthiness in relation to <b>a rental agreement</b>.<br /><br />I understand that this may involve obtaining my credit report from registered credit bureaus in accordance with the <a href=https://www.gov.za/sites/default/files/gcis_document/201409/a34-050_1.pdf target=_blank>National Credit Act</a> and the <a href=https://www.gov.za/sites/default/files/gcis_document/201409/3706726-11act4of2013popi.pdf target=_blank>Protection of Personal Information Act (POPIA)</a>.",
           isRequired: true,
           placeholder: "Sign",
         },

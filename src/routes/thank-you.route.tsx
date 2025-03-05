@@ -44,9 +44,7 @@ export function ThankYouRoute() {
             </Typography>
 
             <Typography sx={{ mb: 4, textAlign: "center" }} variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              aliquet enim nisi, fringilla mollis magna interdum ac. Suspendisse
-              erat massa, mattis a convallis in, pharetra quis ante.
+              You&apos;ll receive an email shortly.
             </Typography>
           </Box>
         </LocalizationProvider>
