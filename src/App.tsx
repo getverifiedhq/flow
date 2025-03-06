@@ -1,10 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { MainRoute, ThankYouRoute } from "./routes";
+import { MainRoute, SelectorRoute, ThankYouRoute } from "./routes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainRoute />,
+  },
+  {
+    path: "/selector",
+    element: <SelectorRoute />,
   },
   {
     path: "/:formId",
