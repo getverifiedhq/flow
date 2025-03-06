@@ -1,8 +1,8 @@
 import { addDays, subYears } from "date-fns";
 import { IForm } from "../types";
 
-export const FORM_REVO_PROPERTY: IForm = {
-  id: "revo-property",
+export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
+  id: "revo-property-individual",
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
   payment: {
@@ -226,38 +226,6 @@ export const FORM_REVO_PROPERTY: IForm = {
         },
       ],
       title: "Reference",
-    },
-    {
-      description: null,
-      fields: [
-        {
-          type: "text",
-          name: "guarantor_first_name",
-          title: "First Name",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "guarantor_last_name",
-          title: "Last Name",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "guarantor_email_address",
-          title: "Email Address",
-          isRequired: true,
-          inputType: "email",
-        },
-        {
-          type: "text",
-          name: "guarantor_mobile_number",
-          title: "Mobile Number",
-          isRequired: true,
-          inputType: "tel",
-        },
-      ],
-      title: "Guarantor",
     },
     {
       description: null,

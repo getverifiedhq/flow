@@ -14,27 +14,31 @@ import { THEMES } from "../core";
 
 const options = [
   {
+    id: "revo-property-individual",
     title: "Apply as an Individual",
     description:
       "Apply in your own name and take full responsibility for the lease, including rental payments and obligations.",
   },
   {
+    id: "revo-property-individual-guarantor",
     title:
       "Apply as an Individual with a Family Member or Guardian as a Guarantor",
     description:
       "Apply in your name with financial support from a family member or guardian who will act as a guarantor.",
   },
-  {
-    title:
-      "Apply as an Individual with a Company, Bursary, or Sponsor as a Guarantor",
-    description:
-      "Apply in your name with financial support from a company, bursary, or sponsor acting as a guarantor",
-  },
-  {
-    title: "Apply as a Company",
-    description:
-      "Apply on behalf of a registered company, which will be responsible for the lease and rental payments.",
-  },
+  // {
+  //   id: "revo-property-individual-guarantor",
+  //   title:
+  //     "Apply as an Individual with a Company, Bursary, or Sponsor as a Guarantor",
+  //   description:
+  //     "Apply in your name with financial support from a company, bursary, or sponsor acting as a guarantor",
+  // },
+  // {
+  //   id: "revo-property-individual-guarantor",
+  //   title: "Apply as a Company",
+  //   description:
+  //     "Apply on behalf of a registered company, which will be responsible for the lease and rental payments.",
+  // },
 ];
 
 const image: string =
@@ -53,13 +57,13 @@ export function SelectorRoute() {
               </Box>
             ) : null}
 
-            <Typography sx={{ mb: 2, textAlign: "center" }} variant="h5">
+            <Typography sx={{ mb: 4, textAlign: "center" }} variant="h5">
               Select a Rental Application
             </Typography>
 
-            {options.map((x, index) => (
+            {options.map((x) => (
               <Card sx={{ mb: 2 }}>
-                <CardContent key={index}>
+                <CardContent key={x.id}>
                   <Typography gutterBottom variant="h6" component="div">
                     {x.title}
                   </Typography>
@@ -68,7 +72,7 @@ export function SelectorRoute() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button color="primary" href="/revo-property" size="small">
+                  <Button color="primary" href={`/${x.id}`} size="small">
                     Continue
                   </Button>
                 </CardActions>

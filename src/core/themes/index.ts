@@ -7,6 +7,8 @@ export const THEMES: { [key: string]: Theme } = {
   "get-verified": THEME_SAMPLE,
   // "get-verified": THEME_QUAY_1_INTERNATIONAL_REALTY,
   "revo-property": THEME_REVO_PROPERTY,
+  "revo-property-individual": THEME_REVO_PROPERTY,
+  "revo-property-individual-guarantor": THEME_REVO_PROPERTY,
   "revo-property-guarantor": THEME_REVO_PROPERTY,
   sample: THEME_SAMPLE,
 };
