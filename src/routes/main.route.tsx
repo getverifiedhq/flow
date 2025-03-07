@@ -3,13 +3,15 @@ import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormComponent } from "../components/form.component";
 import { FORMS, IForm, IRecord, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function MainRoute() {
   const params = useParams();
+
+  const navigate = useNavigate();
 
   const form = useFetch({
     auto: true,
@@ -95,9 +97,22 @@ export function MainRoute() {
 
               if (fetch.result && submit) {
                 if (fetch.result.payment) {
-                  // TODO: call webhook or submit document becuase it will be in edit mode
-                  // TODO: change to router
-                  window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
+                  await axios.post<IRecord>(
+                    `https://api.getverified.co.za/api/v1/webhooks/paystack`,
+                    {
+                      data: {
+                        metadata: {
+                          reference: fetch.result.id,
+                          url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
+                          workflow: form.result.id,
+                        },
+                        reference: fetch.result.payment.transaction.reference,
+                        status: "success",
+                      },
+                    }
+                  );
+
+                  navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
 
                   return;
                 }
@@ -132,9 +147,22 @@ export function MainRoute() {
                   return;
                 }
 
-                // TODO: call webhook or submit document becuase it will be in edit mode
-                // TODO: change to router
-                window.location.href = `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`;
+                await axios.post<IRecord>(
+                  `https://api.getverified.co.za/api/v1/webhooks/paystack`,
+                  {
+                    data: {
+                      metadata: {
+                        reference: fetch.result.id,
+                        url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
+                        workflow: form.result.id,
+                      },
+                      reference: null,
+                      status: "success",
+                    },
+                  }
+                );
+
+                navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
               }
             }}
           />
