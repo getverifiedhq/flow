@@ -237,7 +237,19 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
               </ListItemAvatar>
               <ListItemText
                 primary={x.name}
-                secondary={`${(x.size / 1_000_000).toFixed(2)}MB`}
+                secondary={
+                  x.isError
+                    ? `This doesn't look like a valid ${props.field.tags
+                        .map((x) => {
+                          return {
+                            "bank-statement": "bank statement",
+                            "identity-document": "identity document",
+                            payslip: "payslip",
+                          }[x];
+                        })
+                        .join(", ")}.`
+                    : `${(x.size / 1_000_000).toFixed(2)}MB`
+                }
                 sx={{
                   overflow: "auto",
                 }}

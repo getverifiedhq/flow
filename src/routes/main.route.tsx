@@ -133,12 +133,12 @@ export function MainRoute() {
                     },
                     {
                       headers: {
-                        // authorization: `Bearer ${
-                        //   import.meta.env.PROD
-                        //     ? "sk_live_6280b04e712004355bb26155e3494011c2196fd6"
-                        //     : "sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"
-                        // }`,
-                        authorization: `Bearer ${"sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"}`,
+                        authorization: `Bearer ${
+                          import.meta.env.PROD
+                            ? "sk_live_6280b04e712004355bb26155e3494011c2196fd6"
+                            : "sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"
+                        }`,
+                        // authorization: `Bearer ${"sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"}`,
                       },
                     }
                   );
