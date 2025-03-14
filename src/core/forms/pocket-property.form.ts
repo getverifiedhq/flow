@@ -8,40 +8,40 @@ export const FORM_POCKET_PROPERTY: IForm = {
     amount: 225_00,
   },
   sections: [
-    {
-      description: null,
-      fields: [
-        {
-          type: "text",
-          name: "applicant_first_name",
-          title: "First Name",
-          description: "Enter your first name as it appears on your ID.",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "applicant_last_name",
-          title: "Last Name",
-          description: "Enter your last name as it appears on your ID.",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "applicant_email_address",
-          title: "Email Address",
-          isRequired: true,
-          inputType: "email",
-        },
-        {
-          type: "text",
-          name: "applicant_mobile_number",
-          title: "Mobile Number",
-          isRequired: true,
-          inputType: "tel",
-        },
-      ],
-      title: "Personal Information",
-    },
+    // {
+    //   description: null,
+    //   fields: [
+    //     {
+    //       type: "text",
+    //       name: "applicant_first_name",
+    //       title: "First Name",
+    //       description: "Enter your first name as it appears on your ID.",
+    //       isRequired: true,
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_last_name",
+    //       title: "Last Name",
+    //       description: "Enter your last name as it appears on your ID.",
+    //       isRequired: true,
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_email_address",
+    //       title: "Email Address",
+    //       isRequired: true,
+    //       inputType: "email",
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_mobile_number",
+    //       title: "Mobile Number",
+    //       isRequired: true,
+    //       inputType: "tel",
+    //     },
+    //   ],
+    //   title: "Personal Information",
+    // },
     {
       description: null,
       fields: [
@@ -67,7 +67,7 @@ export const FORM_POCKET_PROPERTY: IForm = {
           choices: ["Single", "Married", "Divorced", "Other"],
         },
       ],
-      title: "Additional Information",
+      title: "Personal Information",
     },
     {
       description: null,
