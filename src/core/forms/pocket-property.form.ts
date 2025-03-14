@@ -4,9 +4,6 @@ import { IForm } from "../types";
 export const FORM_POCKET_PROPERTY: IForm = {
   id: "pocket-property",
   image: "https://pocketproperty.app/_next/static/media/logo.f88f19f0.svg",
-  payment: {
-    amount: 225_00,
-  },
   sections: [
     // {
     //   description: null,
@@ -108,5 +105,5 @@ export const FORM_POCKET_PROPERTY: IForm = {
       title: "Consent",
     },
   ],
-  title: "Rental Application",
+  title: "Credit Report Application",
 };

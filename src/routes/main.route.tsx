@@ -5,7 +5,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormComponent } from "../components/form.component";
-import { FORMS, IForm, IRecord, THEMES } from "../core";
+import { FORMS, IForm, IRecord, THEME_GET_VERIFIED, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function MainRoute() {
@@ -81,7 +81,7 @@ export function MainRoute() {
 
   return (
     <>
-      <ThemeProvider theme={THEMES[form.result.id]}>
+      <ThemeProvider theme={THEMES[form.result.id] || THEME_GET_VERIFIED}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <FormComponent
@@ -117,53 +117,18 @@ export function MainRoute() {
                   return;
                 }
 
-                if (form.result.payment) {
-                  const response = await axios.post(
-                    "https://api.paystack.co/transaction/initialize",
-                    {
-                      amount: form.result.payment.amount,
-                      channels: ["card"],
-                      email: data["applicant_email_address"],
-                      callback_url: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
-                      metadata: {
-                        reference: fetch.result.id,
-                        url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
-                        workflow: form.result.id,
-                      },
-                    },
-                    {
-                      headers: {
-                        authorization: `Bearer ${
-                          import.meta.env.PROD
-                            ? "sk_live_6280b04e712004355bb26155e3494011c2196fd6"
-                            : "sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"
-                        }`,
-                        // authorization: `Bearer ${"sk_test_8809a4e2627f05d5106219d51ebaef49aa1a0993"}`,
-                      },
-                    }
-                  );
-
-                  window.location.href = response.data.data.authorization_url;
-
-                  return;
-                }
-
-                await axios.post<IRecord>(
-                  `https://api.getverified.co.za/api/v1/webhooks/paystack`,
+                const response = await axios.post(
+                  `https://api.getverified.co.za/api/v1/records/${fetch.result.id}/paystack`,
                   {
-                    data: {
-                      metadata: {
-                        reference: fetch.result.id,
-                        url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
-                        workflow: form.result.id,
-                      },
-                      reference: null,
-                      status: "success",
-                    },
+                    callback: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
+                    url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
+                    workflow: form.result.id,
                   }
                 );
 
-                navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
+                window.location.href = response.data.data.authorization_url;
+
+                return;
               }
             }}
           />

@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { useParams } from "react-router-dom";
-import { FORMS, IForm, THEMES } from "../core";
+import { FORMS, IForm, THEME_GET_VERIFIED, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function ThankYouRoute() {
@@ -29,7 +29,7 @@ export function ThankYouRoute() {
 
   return (
     <>
-      <ThemeProvider theme={THEMES[form.result.id]}>
+      <ThemeProvider theme={THEMES[form.result.id] || THEME_GET_VERIFIED}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>

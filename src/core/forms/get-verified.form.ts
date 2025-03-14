@@ -4,9 +4,6 @@ import { IForm } from "../types";
 export const FORM_GET_VERIFIED: IForm = {
   id: "get-verified",
   image: "/images/get-verified.png",
-  payment: {
-    amount: 225_00,
-  },
   sections: [
     {
       description: null,

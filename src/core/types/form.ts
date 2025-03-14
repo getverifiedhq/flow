@@ -5,10 +5,6 @@ export type IForm = {
 
   image: string | null;
 
-  payment: {
-    amount: number;
-  } | null;
-
   sections: Array<ISection>;
 
   title: string | null;

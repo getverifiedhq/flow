@@ -3,7 +3,6 @@ import { IForm } from "../types";
 export const FORM_SAMPLE: IForm = {
   id: "sample",
   image: "/images/get-verified.png",
-  payment: null,
   sections: [
     {
       description: null,

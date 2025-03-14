@@ -5,9 +5,6 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
   id: "revo-property-individual-guarantor",
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
-  payment: {
-    amount: 995_00,
-  },
   sections: [
     {
       description: null,
