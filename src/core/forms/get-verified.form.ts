@@ -125,5 +125,5 @@ export const FORM_GET_VERIFIED: IForm = {
       title: "Consent",
     },
   ],
-  title: "Rental Application",
+  title: null,
 };

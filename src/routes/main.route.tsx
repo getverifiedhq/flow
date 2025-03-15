@@ -96,27 +96,6 @@ export function MainRoute() {
               }
 
               if (fetch.result && submit) {
-                if (fetch.result.payment) {
-                  await axios.post<IRecord>(
-                    `https://api.getverified.co.za/api/v1/webhooks/paystack`,
-                    {
-                      data: {
-                        metadata: {
-                          reference: fetch.result.id,
-                          url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
-                          workflow: form.result.id,
-                        },
-                        reference: fetch.result.payment.transaction.reference,
-                        status: "success",
-                      },
-                    }
-                  );
-
-                  navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
-
-                  return;
-                }
-
                 const response = await axios.post(
                   `https://api.getverified.co.za/api/v1/records/${fetch.result.id}/paystack`,
                   {
@@ -125,6 +104,12 @@ export function MainRoute() {
                     workflow: form.result.id,
                   }
                 );
+
+                if (!response.data) {
+                  navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
+
+                  return;
+                }
 
                 window.location.href = response.data.data.authorization_url;
 
