@@ -1,4 +1,4 @@
-import { addDays, subYears } from "date-fns";
+import { addDays, addMonths, endOfMonth, startOfDay, subYears } from "date-fns";
 import { IForm } from "../types";
 
 export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
@@ -66,6 +66,19 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
           ],
         },
       ],
+      onChange: (obj, formik) => {
+        console.log(obj);
+        if (obj["move_in_date"]) {
+          const date = startOfDay(new Date(obj["move_in_date"]));
+
+          formik.setFieldValue(
+            "move_out_date",
+            endOfMonth(
+              addMonths(date, date.getDate() === 1 ? 11 : 12)
+            ).toISOString()
+          );
+        }
+      },
       title: "Rental Information",
     },
     {

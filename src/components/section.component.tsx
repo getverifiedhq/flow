@@ -34,7 +34,10 @@ export function SectionComponent(props: {
     }, {} as { [key: string]: any });
 
     if (Object.keys(obj).length > 0) {
-      // TODO
+      if (props.section.onChange) {
+        props.section.onChange(obj, formik);
+      }
+
       formikValues.current = formik.values;
     }
   }, [formik.values]);

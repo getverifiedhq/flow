@@ -6,7 +6,6 @@ import {
   TextField,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { format, parseISO } from "date-fns";
 import { IField, IFieldProps } from "../core";
 import { UploadFieldComponent } from "./fields/upload-field.component";
 import { DropdownComponent } from "./fields/dropdown.component";
@@ -113,7 +112,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
             props.handleChange({
               target: {
                 name: props.field.name,
-                value: value ? format(value, "yyyy-MM-dd HH:mm:ss") : undefined,
+                value: value ? value.toISOString() : undefined,
               },
             })
           }
@@ -138,8 +137,8 @@ export function FieldComponent(props: IFieldProps<IField>) {
             },
           }}
           sx={{ mb: 2 }}
-          timezone="UTC"
-          value={props.value ? parseISO(props.value) : null}
+          // timezone="UTC"
+          value={props.value ? new Date(props.value) : null}
           views={
             props.field.inputType === "month" ? ["month", "year"] : undefined
           }
