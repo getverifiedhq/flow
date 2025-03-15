@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 import {
@@ -22,6 +22,22 @@ export function SectionComponent(props: {
     },
     validationSchema: buildValidationSchema(props.section.fields),
   });
+
+  const formikValues = useRef(formik.values);
+
+  useEffect(() => {
+    const obj = Object.keys(formik.values).reduce((dict, key) => {
+      if (formik.values[key] !== formikValues.current[key]) {
+        dict[key] = formik.values[key];
+      }
+      return dict;
+    }, {} as { [key: string]: any });
+
+    if (Object.keys(obj).length > 0) {
+      // TODO
+      formikValues.current = formik.values;
+    }
+  }, [formik.values]);
 
   useEffect(() => {
     formik.setValues(buildInitialValues(props.section.fields, props.data));

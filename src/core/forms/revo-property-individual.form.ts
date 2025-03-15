@@ -35,7 +35,7 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
           name: "move_out_date",
           title: "When would you like to move-out? (optional)",
           isRequired: false,
-          inputType: "month",
+          inputType: "date",
           min: addDays(new Date(), 8).toISOString(),
         },
         {
@@ -179,11 +179,20 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
       fields: [
         {
           type: "file",
-          name: "applicant_documents_supporting_documents",
-          title: "Bank Statements and Payslips",
-          tags: ["bank-statement", "other"],
+          name: "applicant_documents_bank_statements",
+          title: "Bank Statements",
+          tags: ["bank-statement"],
           description:
-            "Please upload your bank statements and payslips from the past 3 months.",
+            "Please upload your bank statements from the past 3 months.",
+          isRequired: true,
+          sourceType: "camera",
+        },
+        {
+          type: "file",
+          name: "applicant_documents_payslips",
+          title: "Payslips",
+          tags: ["payslip", "other"],
+          description: "Please upload your payslips from the past 3 months.",
           isRequired: true,
           sourceType: "camera",
         },
