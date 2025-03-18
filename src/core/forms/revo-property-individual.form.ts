@@ -1,4 +1,5 @@
 import { addDays, addMonths, endOfMonth, startOfDay, subYears } from "date-fns";
+import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { IForm } from "../types";
 
 export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
@@ -67,15 +68,21 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         },
       ],
       onChange: (obj, formik) => {
-        console.log(obj);
         if (obj["move_in_date"]) {
-          const date = startOfDay(new Date(obj["move_in_date"]));
+          const date = startOfDay(
+            fromZonedTime(
+              obj["move_in_date"],
+              Intl.DateTimeFormat().resolvedOptions().timeZone
+            )
+          );
 
           formik.setFieldValue(
             "move_out_date",
-            endOfMonth(
-              addMonths(date, date.getDate() === 1 ? 11 : 12)
-            ).toISOString()
+            formatInTimeZone(
+              endOfMonth(addMonths(date, date.getDate() === 1 ? 11 : 12)),
+              Intl.DateTimeFormat().resolvedOptions().timeZone,
+              "yyyy-MM-dd HH:mm:ss"
+            )
           );
         }
       },
