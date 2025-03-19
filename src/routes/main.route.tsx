@@ -17,8 +17,6 @@ export function MainRoute() {
     auto: true,
     dependencies: [params.formId],
     fn: async (): Promise<IForm | null> => {
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
-
       return (
         FORMS.find((x) => x.id === params.formId) ||
         FORMS.find((x) => x.id === "get-verified") ||
@@ -28,9 +26,15 @@ export function MainRoute() {
   });
 
   const fetch = useFetch({
-    auto: true,
+    auto: form.result ? true : false,
     dependencies: [params.id],
-    fn: async (data: { [key: string]: any } | null): Promise<IRecord> => {
+    fn: async (
+      data: { [key: string]: any } | null
+    ): Promise<IRecord | null> => {
+      if (!form.result) {
+        return null;
+      }
+
       if (params.id) {
         if (!data) {
           const response = await axios.get<IRecord>(
@@ -44,6 +48,8 @@ export function MainRoute() {
           `https://api.getverified.co.za/api/v1/records/${params.id}`,
           {
             data,
+            metadata: {},
+            webhook: form.result.webhook,
           }
         );
 
@@ -55,15 +61,16 @@ export function MainRoute() {
             `https://api.getverified.co.za/api/v1/records/${fetch.result.id}`,
             {
               data: data || {},
+              metadata: {},
+              webhook: form.result.webhook,
             }
           )
         : await axios.post<IRecord>(
             "https://api.getverified.co.za/api/v1/records",
             {
               data: data || {},
-              metadata: {
-                formId: params.formId,
-              },
+              metadata: {},
+              webhook: form.result.webhook,
             }
           );
 

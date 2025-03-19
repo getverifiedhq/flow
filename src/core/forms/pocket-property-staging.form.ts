@@ -1,27 +1,47 @@
 import { subYears } from "date-fns";
 import { IForm } from "../types";
 
-export const FORM_GET_VERIFIED: IForm = {
-  id: "get-verified",
-  image: "/images/get-verified.png",
+export const FORM_POCKET_PROPERTY_STAGING: IForm = {
+  id: "pocket-property-staging",
+  image: "https://pocketproperty.app/_next/static/media/logo.f88f19f0.svg",
   sections: [
+    // {
+    //   description: null,
+    //   fields: [
+    //     {
+    //       type: "text",
+    //       name: "applicant_first_name",
+    //       title: "First Name",
+    //       description: "Enter your first name as it appears on your ID.",
+    //       isRequired: true,
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_last_name",
+    //       title: "Last Name",
+    //       description: "Enter your last name as it appears on your ID.",
+    //       isRequired: true,
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_email_address",
+    //       title: "Email Address",
+    //       isRequired: true,
+    //       inputType: "email",
+    //     },
+    //     {
+    //       type: "text",
+    //       name: "applicant_mobile_number",
+    //       title: "Mobile Number",
+    //       isRequired: true,
+    //       inputType: "tel",
+    //     },
+    //   ],
+    //   title: "Personal Information",
+    // },
     {
       description: null,
       fields: [
-        {
-          type: "text",
-          name: "applicant_first_name",
-          title: "First Name",
-          description: "Enter your first name as it appears on your ID.",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "applicant_last_name",
-          title: "Last Name",
-          description: "Enter your last name as it appears on your ID.",
-          isRequired: true,
-        },
         {
           type: "text",
           name: "applicant_date_of_birth",
@@ -42,20 +62,6 @@ export const FORM_GET_VERIFIED: IForm = {
           title: "Marital Status",
           isRequired: true,
           choices: ["Single", "Married", "Divorced", "Other"],
-        },
-        {
-          type: "text",
-          name: "applicant_email_address",
-          title: "Email Address",
-          isRequired: true,
-          inputType: "email",
-        },
-        {
-          type: "text",
-          name: "applicant_mobile_number",
-          title: "Mobile Number",
-          isRequired: true,
-          inputType: "tel",
         },
       ],
       title: "Personal Information",
@@ -84,32 +90,6 @@ export const FORM_GET_VERIFIED: IForm = {
       title: "Identity Verification",
     },
     {
-      description: "Who should receive your credit report?",
-      fields: [
-        {
-          type: "text",
-          name: "recipient_name",
-          title: "Name",
-          isRequired: true,
-        },
-        {
-          type: "text",
-          name: "recipient_email_address",
-          title: "Email Address",
-          isRequired: true,
-          inputType: "email",
-        },
-        {
-          type: "text",
-          name: "recipient_mobile_number",
-          title: "Mobile Number",
-          isRequired: true,
-          inputType: "tel",
-        },
-      ],
-      title: "Recipient",
-    },
-    {
       description: null,
       fields: [
         {
@@ -125,6 +105,6 @@ export const FORM_GET_VERIFIED: IForm = {
       title: "Consent",
     },
   ],
-  title: null,
-  webhook: null,
+  title: "Credit Report Application",
+  webhook: "https://webhook.site/d1951f5e-56ca-487d-9bd9-f0a30a2b7882",
 };

@@ -45,4 +45,5 @@ export const FORM_SAMPLE: IForm = {
     },
   ],
   title: "Sample Application",
+  webhook: null,
 };

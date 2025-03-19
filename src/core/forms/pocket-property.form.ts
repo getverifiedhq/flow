@@ -106,4 +106,5 @@ export const FORM_POCKET_PROPERTY: IForm = {
     },
   ],
   title: "Credit Report Application",
+  webhook: null,
 };

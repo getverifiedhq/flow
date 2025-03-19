@@ -8,4 +8,6 @@ export type IForm = {
   sections: Array<ISection>;
 
   title: string | null;
+
+  webhook: string | null;
 };
