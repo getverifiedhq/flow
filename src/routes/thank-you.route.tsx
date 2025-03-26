@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { useParams } from "react-router-dom";
-import { FORMS, IForm, THEME_GET_VERIFIED, THEMES } from "../core";
+import { FORMS, IForm, THEME_REVO_PROPERTY, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function ThankYouRoute() {
@@ -13,11 +13,9 @@ export function ThankYouRoute() {
     auto: true,
     dependencies: [params.formId],
     fn: async (): Promise<IForm | null> => {
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
-
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "get-verified") ||
+        FORMS.find((x) => x.id === "revo-property-individual") ||
         null
       );
     },
@@ -29,7 +27,7 @@ export function ThankYouRoute() {
 
   return (
     <>
-      <ThemeProvider theme={THEMES[form.result.id] || THEME_GET_VERIFIED}>
+      <ThemeProvider theme={THEMES[form.result.id] || THEME_REVO_PROPERTY}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>

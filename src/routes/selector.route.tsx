@@ -10,7 +10,7 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
-import { THEMES } from "../core";
+import { THEME_REVO_PROPERTY } from "../core";
 
 const options = [
   {
@@ -47,7 +47,7 @@ const image: string =
 export function SelectorRoute() {
   return (
     <>
-      <ThemeProvider theme={THEMES["revo-property"]}>
+      <ThemeProvider theme={THEME_REVO_PROPERTY}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>

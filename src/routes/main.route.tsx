@@ -5,7 +5,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FormComponent } from "../components/form.component";
-import { FORMS, IForm, IRecord, THEME_GET_VERIFIED, THEMES } from "../core";
+import { FORMS, IForm, IRecord, THEME_REVO_PROPERTY, THEMES } from "../core";
 import { useFetch } from "../hooks";
 
 export function MainRoute() {
@@ -19,7 +19,7 @@ export function MainRoute() {
     fn: async (): Promise<IForm | null> => {
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "get-verified") ||
+        FORMS.find((x) => x.id === "revo-property-individual") ||
         null
       );
     },
@@ -88,7 +88,7 @@ export function MainRoute() {
 
   return (
     <>
-      <ThemeProvider theme={THEMES[form.result.id] || THEME_GET_VERIFIED}>
+      <ThemeProvider theme={THEMES[form.result.id] || THEME_REVO_PROPERTY}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <FormComponent
