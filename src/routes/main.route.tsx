@@ -106,8 +106,7 @@ export function MainRoute() {
                 const response = await axios.post(
                   `https://api.getverified.co.za/api/v1/records/${fetch.result.id}/paystack`,
                   {
-                    callback: `${window.location.origin}/${form.result.id}/${fetch.result.id}/thank-you`,
-                    url: `${window.location.origin}/${form.result.id}/${fetch.result.id}`,
+                    hostname: window.location.hostname,
                     workflow: form.result.id,
                   }
                 );
