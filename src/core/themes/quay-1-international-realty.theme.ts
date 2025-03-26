@@ -2,13 +2,17 @@ import { createTheme } from "@mui/material/styles";
 
 export const THEME_QUAY_1_INTERNATIONAL_REALTY = createTheme({
   palette: {
+    mode: "dark",
     background: {
-      default: "#f6f6f6",
+      default: "#3c5aa5",
     },
-    primary: { main: "#3c5aa5" },
-    secondary: { main: "#ffc800" },
-    error: { main: "hsl(344, 47%, 44%)" },
-    success: { main: "hsl(92, 47%, 44%)" },
+    text: {
+      primary: "#ffffff",
+      secondary: "#b0bec5",
+    },
+    primary: { main: "#ffc800" },
+    error: { main: "hsl(344, 23%, 58%)" },
+    success: { main: "#93ad7c" },
   },
   typography: {
     fontFamily: ["DM Sans", "sans-serif"].join(","),
@@ -17,7 +21,7 @@ export const THEME_QUAY_1_INTERNATIONAL_REALTY = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#f6f6f6",
+          backgroundColor: "#3c5aa5",
         },
       },
     },
