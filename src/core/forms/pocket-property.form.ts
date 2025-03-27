@@ -106,5 +106,5 @@ export const FORM_POCKET_PROPERTY: IForm = {
     },
   ],
   title: "Credit Report Application",
-  webhook: null,
+  webhook: "https://pocketproperty.app/api/webhook/getverified/credit-report",
 };
