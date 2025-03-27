@@ -2,7 +2,7 @@ import { subYears } from "date-fns";
 import { IForm } from "../types";
 
 export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
-  id: "revo-property-guarantor",
+  id: "guarantor",
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
   sections: [
