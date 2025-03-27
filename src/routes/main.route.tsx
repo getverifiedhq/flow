@@ -19,7 +19,7 @@ export function MainRoute() {
     fn: async (): Promise<IForm | null> => {
       return (
         FORMS.find((x) => x.id === params.formId) ||
-        FORMS.find((x) => x.id === "revo-property-individual") ||
+        FORMS.find((x) => x.id === "individual") ||
         null
       );
     },
