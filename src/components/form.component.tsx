@@ -73,24 +73,6 @@ export function FormComponent(props: {
             </Step>
           ))}
         </Stepper>
-
-        {/* <Typography sx={{ color: "#b0bec5" }} variant="body2">
-          By opting-in/entering into any agreement via any opt-in provision with
-          any of the above-mentioned subsidiaries and /or companies, you hereby
-          agree and consent to, that the requested service(s) be provided by
-          Revo (Pty) Ltd, its subsidiaries or affiliates (“Revo”). At no stage
-          shall any provision of service, agreed and consented to via any opt-in
-          provision, constitute an agreement for the provision of services
-          between yourself and the relevant subsidiary or affiliate. By agreeing
-          to the opt-in provision, you hereby consent to engage with Revo only
-          and share your personal information with the relevant subsidiary and
-          affiliates for the provision of services, as requested. Such
-          information shall only be used in line with the provisions of the
-          Protection of Personal Information Act 4 of 2013 (“POPIA”) and you
-          hereby consent to your information being processed in line with the
-          provisions set out in POPIA, by both the subsidiary and affiliates
-          concerned.
-        </Typography> */}
       </Box>
     </>
   );
