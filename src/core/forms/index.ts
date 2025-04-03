@@ -7,6 +7,7 @@ import { FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR } from "./revo-property-individ
 import { FORM_REVO_PROPERTY_INDIVIDUAL } from "./revo-property-individual.form";
 import { FORM_SAMPLE } from "./sample.form";
 import { FORM_QUAY_1_INTERNATIONAL_REALTY } from "./quay-1-international-realty.form";
+import { FORM_TRAFALGAR } from "./trafalgar.form";
 
 export const FORMS: Array<IForm> = [
   FORM_GET_VERIFIED,
@@ -17,4 +18,5 @@ export const FORMS: Array<IForm> = [
   FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR,
   FORM_REVO_PROPERTY_GUARANTOR,
   FORM_SAMPLE,
+  FORM_TRAFALGAR,
 ];
