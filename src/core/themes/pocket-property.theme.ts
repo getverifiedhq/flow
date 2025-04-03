@@ -6,9 +6,9 @@ export const THEME_POCKET_PROPERTY = createTheme({
       default: "#f6f6f6",
     },
     primary: { main: "#f30051" },
-    secondary: { main: "#0a2540" },
-    error: { main: "#cd3d63" },
-    success: { main: "#93ad7c" },
+    secondary: { main: "#f30051" },
+    error: { main: "#f30051" },
+    success: { main: "#99e279" },
   },
   typography: {
     fontFamily: ["DM Sans", "sans-serif"].join(","),
