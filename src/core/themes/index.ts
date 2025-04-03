@@ -5,6 +5,7 @@ import { THEME_TRAFALGAR } from "./trafalgar.theme";
 
 export const THEMES: { [key: string]: Theme } = {
   "pocket-property": THEME_POCKET_PROPERTY,
+  "pocket-property-staging": THEME_POCKET_PROPERTY,
   "quay-1-international-realty": THEME_QUAY_1_INTERNATIONAL_REALTY,
   trafalgar: THEME_TRAFALGAR,
 };
