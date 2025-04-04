@@ -1,5 +1,7 @@
 import {
+  Checkbox,
   FormControl,
+  FormControlLabel,
   InputAdornment,
   InputLabel,
   OutlinedInput,
@@ -14,6 +16,29 @@ import { SignaturePadComponent } from "./fields/signature-pad.component";
 import { PhotoFieldComponent } from "./fields/photo-field.component";
 
 export function FieldComponent(props: IFieldProps<IField>) {
+  if (props.field.type === "checkbox") {
+    return (
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={props.value}
+            name={props.field.name}
+            onChange={(_, checked: boolean) =>
+              props.handleChange({
+                target: {
+                  name: props.field.name,
+                  value: checked,
+                },
+              })
+            }
+          />
+        }
+        label={props.field.title}
+        sx={{ mb: 2 }}
+      />
+    );
+  }
+
   if (props.field.type === "dropdown") {
     return (
       <DropdownComponent

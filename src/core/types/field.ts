@@ -5,6 +5,10 @@ export type IBaseField = {
   title: string;
 };
 
+export type ICheckboxField = IBaseField & {
+  type: "checkbox";
+};
+
 export type IDropdownField = IBaseField & {
   type: "dropdown";
   choices?: Array<string>;
@@ -47,6 +51,7 @@ export type ITextField = IBaseField & {
 };
 
 export type IField =
+  | ICheckboxField
   | IDropdownField
   | IFileField
   | IPhotoField
