@@ -1,7 +1,7 @@
 import { IForm } from "../types";
 import { FORM_REVO_PROPERTY_GUARANTOR } from "./revo-property-guarantor.form";
-import { FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR } from "./revo-property-individual-guarantor.form";
 import { FORM_REVO_PROPERTY_INDIVIDUAL } from "./revo-property-individual.form";
+import { FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR } from "./revo-property-individual-guarantor.form";
 
 export const FORMS: Array<IForm> = [
   FORM_REVO_PROPERTY_INDIVIDUAL,
