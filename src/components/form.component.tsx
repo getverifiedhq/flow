@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Box,
+  Link,
   Step,
   StepContent,
   StepLabel,
@@ -73,6 +74,26 @@ export function FormComponent(props: {
             </Step>
           ))}
         </Stepper>
+
+        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", pb: 2 }}>
+          <Link
+            color="inherit"
+            href="https://app.termly.io/policy-viewer/policy.html?policyUUID=0d4ae206-f485-46bf-a3be-0ff5c855dcea"
+            target="_blank"
+            underline="none"
+          >
+            Terms &amp; Conditions
+          </Link>
+          <span>&#x2022;</span>
+          <Link
+            color="inherit"
+            href="https://app.termly.io/policy-viewer/policy.html?policyUUID=f8de3869-e20f-4f83-bf4b-2cfc44b82f32"
+            target="_blank"
+            underline="none"
+          >
+            Privacy Policy
+          </Link>
+        </Box>
       </Box>
     </>
   );
