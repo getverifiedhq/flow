@@ -257,6 +257,45 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
       description: null,
       fields: [
         {
+          type: "checkbox",
+          name: "financial_advice_a",
+          title:
+            "Insurance for my possessions (e.g. cellphone, laptop, car, etc)",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_b",
+          title:
+            "Investment advice such as tax-free saving accounts, retirement and other investments",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_c",
+          title:
+            "Home loan pre-approval - I'm looking at purchasing a home soon",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_d",
+          title: "Medical aid (e.g. Discovery, Momentum, etc)",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_e",
+          title: "Life insurance or income protection",
+          isRequired: false,
+        },
+      ],
+      title: "Financial Advice",
+    },
+    {
+      description: null,
+      fields: [
+        {
           type: "signature-pad",
           name: "signature",
           title: "Signature",
