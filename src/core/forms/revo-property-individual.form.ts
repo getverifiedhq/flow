@@ -116,7 +116,6 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         {
           type: "text",
           name: "applicant_identity_number",
-          // title: "Identity Number",
           title: "South African ID or Passport Number",
           isRequired: true,
         },
