@@ -1,4 +1,5 @@
-import { addDays, subYears } from "date-fns";
+import { addDays, addMonths, endOfMonth, startOfDay, subYears } from "date-fns";
+import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { IForm } from "../types";
 
 export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
@@ -35,7 +36,7 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
           name: "move_out_date",
           title: "When would you like to move-out? (optional)",
           isRequired: false,
-          inputType: "month",
+          inputType: "date",
           min: addDays(new Date(), 8).toISOString(),
         },
         {
@@ -66,6 +67,25 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
           ],
         },
       ],
+      onChange: (obj, formik) => {
+        if (obj["move_in_date"]) {
+          const date = startOfDay(
+            fromZonedTime(
+              obj["move_in_date"],
+              Intl.DateTimeFormat().resolvedOptions().timeZone
+            )
+          );
+
+          formik.setFieldValue(
+            "move_out_date",
+            formatInTimeZone(
+              endOfMonth(addMonths(date, date.getDate() === 1 ? 11 : 12)),
+              Intl.DateTimeFormat().resolvedOptions().timeZone,
+              "yyyy-MM-dd HH:mm:ss"
+            )
+          );
+        }
+      },
       title: "Rental Information",
     },
     {
@@ -96,7 +116,6 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
         {
           type: "text",
           name: "applicant_identity_number",
-          // title: "Identity Number",
           title: "South African ID or Passport Number",
           isRequired: true,
         },
@@ -179,12 +198,30 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
       fields: [
         {
           type: "file",
-          name: "applicant_documents_supporting_documents",
-          title: "Bank Statements and Payslips",
-          tags: ["bank-statement", "other"],
+          name: "applicant_documents_bank_statements",
+          title: "Bank Statements",
+          tags: ["bank-statement"],
           description:
-            "Please upload your bank statements and payslips from the past 3 months.",
+            "Please upload your bank statements from the past 3 months.",
           isRequired: true,
+          sourceType: "camera",
+        },
+        {
+          type: "file",
+          name: "applicant_documents_payslips",
+          title: "Payslips",
+          tags: ["payslip", "other"],
+          description: "Please upload your payslips from the past 3 months.",
+          isRequired: true,
+          sourceType: "camera",
+        },
+        {
+          type: "file",
+          name: "applicant_documents_visa",
+          title: "Visa",
+          tags: [],
+          description: "Please upload a photo of your visa (if applicable)",
+          isRequired: false,
           sourceType: "camera",
         },
       ],
@@ -223,6 +260,45 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL_GUARANTOR: IForm = {
         },
       ],
       title: "Reference",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "checkbox",
+          name: "financial_advice_a",
+          title:
+            "Insurance for my possessions (e.g. cellphone, laptop, car, etc)",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_b",
+          title:
+            "Investment advice such as tax-free saving accounts, retirement and other investments",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_c",
+          title:
+            "Home loan pre-approval - I'm looking at purchasing a home soon",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_d",
+          title: "Medical aid (e.g. Discovery, Momentum, etc)",
+          isRequired: false,
+        },
+        {
+          type: "checkbox",
+          name: "financial_advice_e",
+          title: "Life insurance or income protection",
+          isRequired: false,
+        },
+      ],
+      title: "Financial Advice",
     },
     {
       description: null,
