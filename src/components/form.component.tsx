@@ -75,7 +75,22 @@ export function FormComponent(props: {
           ))}
         </Stepper>
 
-        <Box sx={{ display: "flex", gap: 2, justifyContent: "center", pb: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+          <img
+            height={16}
+            src="https://secure.getverified.co.za/images/get-verified.png"
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            fontSize: "0.875rem",
+            gap: 1,
+            justifyContent: "center",
+            pb: 2,
+          }}
+        >
           <Link
             color="inherit"
             href="https://app.termly.io/policy-viewer/policy.html?policyUUID=0d4ae206-f485-46bf-a3be-0ff5c855dcea"
