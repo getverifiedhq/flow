@@ -78,7 +78,7 @@ export function FormComponent(props: {
         <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
           <img
             height={16}
-            src="https://secure.getverified.co.za/images/get-verified.png"
+            src="https://secure.getverified.co.za/images/get-verified-white.png"
           />
         </Box>
 
