@@ -14,13 +14,13 @@ import { THEME_REVO_PROPERTY } from "../core";
 
 const options = [
   {
-    id: "revo-property-individual",
+    id: "individual",
     title: "Apply as an Individual",
     description:
       "Apply in your own name and take full responsibility for the lease, including rental payments and obligations.",
   },
   {
-    id: "revo-property-individual-guarantor",
+    id: "individual-guarantor",
     title:
       "Apply as an Individual with a Family Member or Guardian as a Guarantor",
     description:
