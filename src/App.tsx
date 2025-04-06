@@ -4,10 +4,6 @@ import { MainRoute, SelectorRoute, ThankYouRoute } from "./routes";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainRoute />,
-  },
-  {
-    path: "/selector",
     element: <SelectorRoute />,
   },
   {
