@@ -1,4 +1,4 @@
-import { Box, CssBaseline, Typography } from "@mui/material";
+import { Box, CssBaseline, Link, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
@@ -13,8 +13,6 @@ export function ThankYouRoute() {
     auto: true,
     dependencies: [params.formId],
     fn: async (): Promise<IForm | null> => {
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
-
       return (
         FORMS.find((x) => x.id === params.formId) ||
         FORMS.find((x) => x.id === "get-verified") ||
@@ -47,6 +45,38 @@ export function ThankYouRoute() {
               You&apos;ll receive an email shortly.
             </Typography>
           </Box>
+
+          {/* <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+            <img height={16} src="/images/get-verified.png" />
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              fontSize: "0.875rem",
+              gap: 1,
+              justifyContent: "center",
+              pb: 2,
+            }}
+          >
+            <Link
+              color="inherit"
+              href="https://app.termly.io/policy-viewer/policy.html?policyUUID=0d4ae206-f485-46bf-a3be-0ff5c855dcea"
+              target="_blank"
+              underline="none"
+            >
+              Terms &amp; Conditions
+            </Link>
+            <span>&#x2022;</span>
+            <Link
+              color="inherit"
+              href="https://app.termly.io/policy-viewer/policy.html?policyUUID=f8de3869-e20f-4f83-bf4b-2cfc44b82f32"
+              target="_blank"
+              underline="none"
+            >
+              Privacy Policy
+            </Link>
+          </Box> */}
         </LocalizationProvider>
       </ThemeProvider>
     </>
