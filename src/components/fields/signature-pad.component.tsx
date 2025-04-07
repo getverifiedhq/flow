@@ -35,7 +35,7 @@ export function SignaturePadComponent(props: IFieldProps<ISignaturePadField>) {
                 target: {
                   name: props.field.name,
                   value: refSignatureCanvas.current?.isEmpty()
-                    ? ""
+                    ? null
                     : refSignatureCanvas.current?.toDataURL("image/png"),
                 },
               })

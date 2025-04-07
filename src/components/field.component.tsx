@@ -22,6 +22,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
         control={
           <Checkbox
             checked={props.value}
+            disabled={props.disabled}
             name={props.field.name}
             onChange={(_, checked: boolean) =>
               props.handleChange({
@@ -106,11 +107,6 @@ export function FieldComponent(props: IFieldProps<IField>) {
             name={props.field.name}
             onBlur={props.handleBlur}
             onChange={props.handleChange}
-            // onKeyUp={(e) => {
-            //   if (e.key === "Enter") {
-            //     formik.submitForm();
-            //   }
-            // }}
             placeholder={props.field.placeholder}
             slotProps={{
               input: {
@@ -195,11 +191,6 @@ export function FieldComponent(props: IFieldProps<IField>) {
         name={props.field.name}
         onBlur={props.handleBlur}
         onChange={props.handleChange}
-        // onKeyUp={(e) => {
-        //   if (e.key === "Enter") {
-        //     formik.submitForm();
-        //   }
-        // }}
         placeholder={props.field.placeholder}
         slotProps={{
           htmlInput: {
