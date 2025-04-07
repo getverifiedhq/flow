@@ -116,7 +116,7 @@ export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
       fields: [
         {
           type: "file",
-          name: "applicant_documents_bank_statements",
+          name: "guarantor_documents_bank_statements",
           title: "Bank Statements",
           tags: ["bank-statement"],
           description:
@@ -126,7 +126,7 @@ export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
         },
         {
           type: "file",
-          name: "applicant_documents_payslips",
+          name: "guarantor_documents_payslips",
           title: "Payslips",
           tags: ["payslip", "other"],
           description: "Please upload your payslips from the past 3 months.",
@@ -135,7 +135,7 @@ export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
         },
         {
           type: "file",
-          name: "applicant_documents_visa",
+          name: "guarantor_documents_visa",
           title: "Visa",
           tags: [],
           description: "Please upload a photo of your visa (if applicable)",
@@ -150,7 +150,7 @@ export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
       fields: [
         {
           type: "signature-pad",
-          name: "signature",
+          name: "guarantor_signature",
           title: "Signature",
           description:
             "By signing below, I hereby declare and that the information provided is true and correct to the best of my knowledge and this application does not constitute a binding rental contract between me and Revo Property.<br /><br />I agree and consent to Revo Property Pty Ltd, using the above information to run a credit check and other background checks in order to verify the information provided. I give consent for Revo Pty Ltd and its group of companies, Anchor Group Limited (FSP:39834), Carl Greaves Brokers (Pty) Ltd (FSP 13147) and the Betterbond Group (Bettersure Financial Consultants (Pty) Ltd) to contact me using the above contact information in order for them to assist me with real estate, investment, insurance and bond origination advice or services.<br /><br />Please note that if you are approved, there will be a once-off lease drafting fee calculated at 11.5% including VAT on the monthly rental value.",

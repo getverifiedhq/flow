@@ -2,8 +2,8 @@ import { addDays, addMonths, endOfMonth, startOfDay, subYears } from "date-fns";
 import { formatInTimeZone, fromZonedTime } from "date-fns-tz";
 import { IForm } from "../types";
 
-export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
-  id: "individual",
+export const FORM_REVO_PROPERTY_COMPANY: IForm = {
+  id: "company",
   image:
     "https://www.jotform.com/uploads/RevoProperty/form_files/Screenshot%202023-08-01%20at%2007.10.28.64c8a8305d94d3.56571317.png",
   sections: [
@@ -87,6 +87,51 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         }
       },
       title: "Rental Information",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "text",
+          name: "company_name",
+          title: "Company Name",
+          isRequired: true,
+        },
+        {
+          type: "text",
+          name: "company_registration_number",
+          title: "Company Registration Number",
+          isRequired: true,
+        },
+        {
+          type: "file",
+          name: "company_documents_cor14_1",
+          title: "CoR14.1 - Notice of Incorporation",
+          tags: [],
+          description: "CoR14.1 - Notice of Incorporation",
+          isRequired: true,
+          sourceType: "file-camera",
+        },
+        {
+          type: "file",
+          name: "company_documents_cor14_1ab",
+          title: "CoR14.1A or B - Directors Details",
+          tags: [],
+          description: "CoR14.1A or B - Directors Details",
+          isRequired: true,
+          sourceType: "file-camera",
+        },
+        {
+          type: "file",
+          name: "company_documents_cor14_3",
+          title: "CoR14.3 - Registration Certificate",
+          tags: [],
+          description: "CoR14.3 - Registration Certificate",
+          isRequired: true,
+          sourceType: "file-camera",
+        },
+      ],
+      title: "Company Information",
     },
     {
       description: null,
