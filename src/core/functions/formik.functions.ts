@@ -14,6 +14,8 @@ export function buildInitialValues(
       }
     } else if (x.type === "file" || x.type === "photo") {
       dict[x.name] = data[x.name] || [];
+    } else if (x.type === "multiple") {
+      dict[x.name] = data[x.name] || [buildInitialValues(x.fields, {})]; // TODO
     } else {
       dict[x.name] = data[x.name] || "";
     }
@@ -47,7 +49,7 @@ export function buildValidationSchema(fields: Array<IField>) {
         return dict;
       }
 
-      if (x.type === "file" || x.type === "photo") {
+      if (x.type === "file" || x.type === "multiple" || x.type === "photo") {
         let schema = Yup.array();
 
         if (x.isRequired) {

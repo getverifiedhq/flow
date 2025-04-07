@@ -14,6 +14,7 @@ import { UploadFieldComponent } from "./fields/upload-field.component";
 import { DropdownComponent } from "./fields/dropdown.component";
 import { SignaturePadComponent } from "./fields/signature-pad.component";
 import { PhotoFieldComponent } from "./fields/photo-field.component";
+import { MultipleComponent } from "./fields/multiple.component";
 
 export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "checkbox") {
@@ -56,6 +57,19 @@ export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "file") {
     return (
       <UploadFieldComponent
+        disabled={props.disabled}
+        error={props.error}
+        field={props.field}
+        handleBlur={props.handleBlur}
+        handleChange={props.handleChange}
+        value={props.value}
+      />
+    );
+  }
+
+  if (props.field.type === "multiple") {
+    return (
+      <MultipleComponent
         disabled={props.disabled}
         error={props.error}
         field={props.field}

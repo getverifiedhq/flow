@@ -28,6 +28,12 @@ export type IFileField = IBaseField & {
   tags: Array<string>;
 };
 
+export type IMultipleField = IBaseField & {
+  type: "multiple";
+
+  fields: Array<IField>;
+};
+
 export type IPhotoField = IBaseField & {
   type: "photo";
 };
@@ -54,6 +60,7 @@ export type IField =
   | ICheckboxField
   | IDropdownField
   | IFileField
+  | IMultipleField
   | IPhotoField
   | ISignaturePadField
   | ITextField;
