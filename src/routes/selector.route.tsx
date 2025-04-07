@@ -51,7 +51,7 @@ export function SelectorRoute() {
       <ThemeProvider theme={THEME_REVO_PROPERTY}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, py: 4 }}>
+          <Box sx={{ margin: "auto", maxWidth: "576px", px: 2, pt: 4, pb: 6 }}>
             {image ? (
               <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
                 <img height={24} src={image} />
