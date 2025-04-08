@@ -25,6 +25,14 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         },
         {
           type: "text",
+          name: "listing_room_number",
+          title: "Room Number (optional)",
+          description:
+            "Please specify your room number if you're moving into a co-living space",
+          isRequired: false,
+        },
+        {
+          type: "text",
           name: "move_in_date",
           title: "When would you like to move-in?",
           isRequired: true,
@@ -226,6 +234,28 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         },
       ],
       title: "Supporting Documents",
+    },
+    {
+      description: null,
+      fields: [
+        {
+          type: "long_text",
+          name: "applicant_pets",
+          title: "Do you have any pets?",
+          isRequired: false,
+          placeholder:
+            "Please list the type and number of the pets you have (if any).",
+        },
+        {
+          type: "long_text",
+          name: "applicant_vehicles",
+          title: "Do you have a vehicle?",
+          isRequired: false,
+          placeholder:
+            "Please list the make, color and number plate of the vehicles you have (if any).",
+        },
+      ],
+      title: "Additional Information",
     },
     {
       description: null,
