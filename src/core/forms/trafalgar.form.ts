@@ -243,5 +243,6 @@ export const FORM_TRAFALGAR: IForm = {
     },
   ],
   title: "Rental Application",
+  url: null,
   webhook: null,
 };

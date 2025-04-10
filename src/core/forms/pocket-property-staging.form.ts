@@ -106,6 +106,7 @@ export const FORM_POCKET_PROPERTY_STAGING: IForm = {
     },
   ],
   title: "Credit Report Application",
+  url: "https://staging.pocketproperty.app",
   webhook:
     "https://staging.pocketproperty.app/api/webhook/getverified/credit-report",
 };

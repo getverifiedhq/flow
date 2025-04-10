@@ -126,5 +126,6 @@ export const FORM_GET_VERIFIED: IForm = {
     },
   ],
   title: null,
+  url: null,
   webhook: null,
 };

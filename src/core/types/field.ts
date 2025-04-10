@@ -28,6 +28,11 @@ export type IFileField = IBaseField & {
   tags: Array<string>;
 };
 
+export type ILongTextField = IBaseField & {
+  type: "long_text";
+  placeholder?: string;
+};
+
 export type IMultipleField = IBaseField & {
   type: "multiple";
 
@@ -60,6 +65,7 @@ export type IField =
   | ICheckboxField
   | IDropdownField
   | IFileField
+  | ILongTextField
   | IMultipleField
   | IPhotoField
   | ISignaturePadField

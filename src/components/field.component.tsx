@@ -67,6 +67,33 @@ export function FieldComponent(props: IFieldProps<IField>) {
     );
   }
 
+  if (props.field.type === "long_text") {
+    return (
+      <TextField
+        disabled={props.disabled}
+        error={props.error}
+        fullWidth
+        helperText={props.field.description}
+        id={props.field.name}
+        label={props.field.title}
+        multiline={true}
+        name={props.field.name}
+        onBlur={props.handleBlur}
+        onChange={props.handleChange}
+        placeholder={props.field.placeholder}
+        rows={4}
+        slotProps={{
+          inputLabel: {
+            shrink: true,
+          },
+        }}
+        sx={{ mb: 2 }}
+        type="text"
+        value={props.value}
+      />
+    );
+  }
+
   if (props.field.type === "multiple") {
     return (
       <MultipleComponent

@@ -112,6 +112,12 @@ export function MainRoute() {
                 );
 
                 if (!response.data) {
+                  if (form.result.url) {
+                    window.location.href = form.result.url; // TODO: add query parameters
+
+                    return;
+                  }
+
                   navigate(`/${form.result.id}/${fetch.result.id}/thank-you`);
 
                   return;
