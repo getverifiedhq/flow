@@ -93,7 +93,7 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
 
   return (
     <>
-      <Typography sx={{ mb: 1 }}>{props.field.title}</Typography>
+      {/* <Typography sx={{ mb: 1 }}>{props.field.title}</Typography> */}
 
       <Box
         onClick={() =>

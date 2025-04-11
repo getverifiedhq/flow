@@ -14,6 +14,7 @@ import { UploadFieldComponent } from "./fields/upload-field.component";
 import { DropdownComponent } from "./fields/dropdown.component";
 import { SignaturePadComponent } from "./fields/signature-pad.component";
 import { PhotoFieldComponent } from "./fields/photo-field.component";
+import { MultipleComponent } from "./fields/multiple.component";
 
 export function FieldComponent(props: IFieldProps<IField>) {
   if (props.field.type === "checkbox") {
@@ -22,6 +23,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
         control={
           <Checkbox
             checked={props.value}
+            disabled={props.disabled}
             name={props.field.name}
             onChange={(_, checked: boolean) =>
               props.handleChange({
@@ -34,7 +36,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
           />
         }
         label={props.field.title}
-        sx={{ mb: 2 }}
+        sx={{ mb: 4 }}
       />
     );
   }
@@ -85,8 +87,21 @@ export function FieldComponent(props: IFieldProps<IField>) {
             shrink: true,
           },
         }}
-        sx={{ mb: 2 }}
+        sx={{ mb: props.field.description ? 2 : 4 }}
         type="text"
+        value={props.value}
+      />
+    );
+  }
+
+  if (props.field.type === "multiple") {
+    return (
+      <MultipleComponent
+        disabled={props.disabled}
+        error={props.error}
+        field={props.field}
+        handleBlur={props.handleBlur}
+        handleChange={props.handleChange}
         value={props.value}
       />
     );
@@ -127,17 +142,11 @@ export function FieldComponent(props: IFieldProps<IField>) {
             disabled={props.disabled}
             error={props.error}
             fullWidth
-            // helperText={props.field.description}
             id={props.field.name}
             label={props.field.title}
             name={props.field.name}
             onBlur={props.handleBlur}
             onChange={props.handleChange}
-            // onKeyUp={(e) => {
-            //   if (e.key === "Enter") {
-            //     formik.submitForm();
-            //   }
-            // }}
             placeholder={props.field.placeholder}
             slotProps={{
               input: {
@@ -145,7 +154,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
               },
             }}
             startAdornment={<InputAdornment position="start">R</InputAdornment>}
-            sx={{ mb: 2 }}
+            sx={{ mb: 4 }}
             type="text"
             value={props.value}
           />
@@ -195,7 +204,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
               variant: "outlined",
             },
           }}
-          sx={{ mb: 2 }}
+          sx={{ mb: 4 }}
           value={
             props.value
               ? fromZonedTime(
@@ -222,11 +231,6 @@ export function FieldComponent(props: IFieldProps<IField>) {
         name={props.field.name}
         onBlur={props.handleBlur}
         onChange={props.handleChange}
-        // onKeyUp={(e) => {
-        //   if (e.key === "Enter") {
-        //     formik.submitForm();
-        //   }
-        // }}
         placeholder={props.field.placeholder}
         slotProps={{
           htmlInput: {
@@ -240,7 +244,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
             shrink: true,
           },
         }}
-        sx={{ mb: 2 }}
+        sx={{ mb: props.field.description ? 2 : 4 }}
         type="text"
         value={props.value}
       />
