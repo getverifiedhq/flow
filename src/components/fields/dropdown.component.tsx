@@ -17,7 +17,7 @@ export function DropdownComponent(props: IFieldProps<IDropdownField>) {
   }
 
   return (
-    <FormControl fullWidth sx={{ mb: 2 }}>
+    <FormControl fullWidth sx={{ mb: 4 }}>
       <InputLabel shrink>{props.field.title}</InputLabel>
       <Select
         disabled={props.disabled}

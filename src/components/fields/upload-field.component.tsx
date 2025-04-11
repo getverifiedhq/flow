@@ -69,7 +69,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
 
   return (
     <>
-      <Typography sx={{ mb: 1 }}>{props.field.title}</Typography>
+      {/* <Typography sx={{ mb: 1 }}>{props.field.title}</Typography> */}
 
       <Box
         onClick={() =>

@@ -36,7 +36,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
           />
         }
         label={props.field.title}
-        sx={{ mb: 2 }}
+        sx={{ mb: 4 }}
       />
     );
   }
@@ -87,7 +87,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
             shrink: true,
           },
         }}
-        sx={{ mb: 2 }}
+        sx={{ mb: props.field.description ? 2 : 4 }}
         type="text"
         value={props.value}
       />
@@ -142,7 +142,6 @@ export function FieldComponent(props: IFieldProps<IField>) {
             disabled={props.disabled}
             error={props.error}
             fullWidth
-            // helperText={props.field.description}
             id={props.field.name}
             label={props.field.title}
             name={props.field.name}
@@ -155,7 +154,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
               },
             }}
             startAdornment={<InputAdornment position="start">R</InputAdornment>}
-            sx={{ mb: 2 }}
+            sx={{ mb: 4 }}
             type="text"
             value={props.value}
           />
@@ -205,7 +204,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
               variant: "outlined",
             },
           }}
-          sx={{ mb: 2 }}
+          sx={{ mb: 4 }}
           value={
             props.value
               ? fromZonedTime(
@@ -245,7 +244,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
             shrink: true,
           },
         }}
-        sx={{ mb: 2 }}
+        sx={{ mb: props.field.description ? 2 : 4 }}
         type="text"
         value={props.value}
       />

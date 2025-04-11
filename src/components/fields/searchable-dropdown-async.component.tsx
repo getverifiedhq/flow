@@ -116,7 +116,7 @@ export function SearchableDropdownAsyncComponent(
               shrink: true,
             },
           }}
-          sx={{ mb: 2 }}
+          sx={{ mb: 4 }}
         />
       )}
     />

@@ -21,5 +21,12 @@ export const THEME_GET_VERIFIED = createTheme({
         },
       },
     },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });
