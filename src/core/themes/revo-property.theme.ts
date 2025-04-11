@@ -32,5 +32,12 @@ export const THEME_REVO_PROPERTY = createTheme({
         },
       },
     },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });
