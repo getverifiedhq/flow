@@ -21,5 +21,12 @@ export const THEME_POCKET_PROPERTY = createTheme({
         },
       },
     },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });

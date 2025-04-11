@@ -21,5 +21,12 @@ export const THEME_TRAFALGAR = createTheme({
         },
       },
     },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });

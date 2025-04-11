@@ -25,5 +25,12 @@ export const THEME_QUAY_1_INTERNATIONAL_REALTY = createTheme({
         },
       },
     },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          fontSize: "1rem",
+        },
+      },
+    },
   },
 });
