@@ -109,7 +109,7 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          mb: 2,
+          mb: 4,
           px: 2,
           py: 6,
         }}
@@ -151,16 +151,6 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
           }
 
           for (const file of htmlInputElement.files) {
-            let htmlCanvasElement: HTMLCanvasElement = await fileToCanvas(
-              file,
-              600,
-              600
-            );
-
-            const face: faceDetection.Face | null = await detectFace(
-              htmlCanvasElement
-            );
-
             const id: string = faker.string.alphanumeric({
               casing: "lower",
               length: 6,
@@ -172,7 +162,7 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
                   ...previousState.files,
                   {
                     id,
-                    isError: face ? false : true,
+                    isError: false,
                     isLoading: true,
                     name: file.name,
                     size: file.size,
@@ -184,7 +174,14 @@ export function PhotoFieldComponent(props: IFieldProps<IPhotoField>) {
               };
             });
 
-            fileToArrayBuffer(file)
+            fileToCanvas(file, 600, 600)
+              .then((htmlCanvasElement) => detectFace(htmlCanvasElement))
+              .then((face) => {
+                if (!face) {
+                  throw new Error("unable to detect face");
+                }
+              })
+              .then(() => fileToArrayBuffer(file))
               .then((arrayBuffer) => uploadArrayBuffer(arrayBuffer, file.type))
               .then((result) =>
                 setState((previousState) => {
