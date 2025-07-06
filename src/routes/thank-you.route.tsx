@@ -1,7 +1,7 @@
 import { Box, CssBaseline, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useParams } from "react-router-dom";
 import { FORMS, IForm, THEME_GET_VERIFIED, THEMES } from "../core";
 import { useFetch } from "../hooks";
