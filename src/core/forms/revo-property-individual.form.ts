@@ -349,5 +349,5 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
   title: "Rental Application",
   url: null,
   webhook:
-    "https://hirebarend.app.n8n.cloud/webhook-test/2a548403-edf5-4cac-a0e8-c735cd1b02f4",
+    "https://hirebarend.app.n8n.cloud/webhook/2a548403-edf5-4cac-a0e8-c735cd1b02f4",
 };
