@@ -162,5 +162,6 @@ export const FORM_REVO_PROPERTY_GUARANTOR: IForm = {
     },
   ],
   title: "Rental Application",
+  url: null,
   webhook: null,
 };

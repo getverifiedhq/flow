@@ -204,7 +204,7 @@ export function FieldComponent(props: IFieldProps<IField>) {
               variant: "outlined",
             },
           }}
-          sx={{ mb: 4 }}
+          sx={{ mb: props.field.description ? 2 : 4 }}
           value={
             props.value
               ? fromZonedTime(

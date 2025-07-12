@@ -85,7 +85,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          mb: 2,
+          mb: 4,
           px: 2,
           py: 6,
         }}

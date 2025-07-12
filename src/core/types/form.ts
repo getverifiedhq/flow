@@ -9,5 +9,7 @@ export type IForm = {
 
   title: string | null;
 
+  url: string | null;
+
   webhook: string | null;
 };

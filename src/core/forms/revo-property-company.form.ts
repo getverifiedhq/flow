@@ -362,5 +362,6 @@ export const FORM_REVO_PROPERTY_COMPANY: IForm = {
     },
   ],
   title: "Rental Application",
+  url: null,
   webhook: null,
 };
