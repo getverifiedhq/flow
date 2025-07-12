@@ -48,6 +48,8 @@ export function MainRoute() {
           `https://api.getverified.co.za/api/v1/records/${params.id}`,
           {
             data,
+            disabled: false,
+            formId: form.result.id,
             metadata: {},
             webhook: form.result.webhook,
           }
@@ -61,6 +63,8 @@ export function MainRoute() {
             `https://api.getverified.co.za/api/v1/records/${fetch.result.id}`,
             {
               data: data || {},
+              disabled: false,
+              formId: form.result.id,
               metadata: {},
               webhook: form.result.webhook,
             }
@@ -69,6 +73,7 @@ export function MainRoute() {
             "https://api.getverified.co.za/api/v1/records",
             {
               data: data || {},
+              formId: form.result.id,
               metadata: {},
               webhook: form.result.webhook,
             }
@@ -107,7 +112,6 @@ export function MainRoute() {
                   `https://api.getverified.co.za/api/v1/records/${fetch.result.id}/paystack`,
                   {
                     hostname: window.location.hostname,
-                    workflow: form.result.id,
                   }
                 );
 
