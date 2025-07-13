@@ -25,10 +25,9 @@ export const FORM_REVO_PROPERTY_INDIVIDUAL: IForm = {
         },
         {
           type: "text",
-          name: "listing_room_number",
-          title: "Room Number (optional)",
-          description:
-            "Please specify your room number if you're moving into a co-living space",
+          name: "listing_room_or_unit_number",
+          title: "Room or Unit Number (optional)",
+          description: "Please specify your room or unit number",
           isRequired: false,
         },
         {
