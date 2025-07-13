@@ -155,9 +155,9 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                     files: previousState.files.map((x) => {
                       if (x.id === id) {
                         x.isError =
-                          props.field.tags.length && result.tags.length
+                          (props.field.tags || []).length && result.tags.length
                             ? !result.tags.some((y) =>
-                                props.field.tags.includes(y)
+                                (props.field.tags || []).includes(y)
                               )
                             : false;
                         x.isLoading = false;
@@ -239,7 +239,7 @@ export function UploadFieldComponent(props: IFieldProps<IFileField>) {
                 primary={x.name}
                 secondary={
                   x.isError
-                    ? `This doesn't look like a valid ${props.field.tags
+                    ? `This doesn't look like a valid ${(props.field.tags || [])
                         .map((x) => {
                           return {
                             "bank-statement": "bank statement",

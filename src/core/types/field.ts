@@ -1,65 +1,83 @@
-export type IBaseField = {
-  description?: string;
-  isRequired: boolean;
+export type Validator = {
+  text: string;
+  type: "code" | "regex";
+  value: string;
+};
+
+export interface IBaseField {
   name: string;
+
   title: string;
-};
 
-export type ICheckboxField = IBaseField & {
+  description?: string;
+
+  isRequired: boolean;
+
+  validators?: Validator[];
+}
+
+export interface ICheckboxField extends IBaseField {
   type: "checkbox";
-};
+}
 
-export type IDropdownField = IBaseField & {
+export interface IDropdownField extends IBaseField {
   type: "dropdown";
-  choices?: Array<string>;
+
+  choices?: string[];
+
   choicesByUrl?: {
     url: string;
-    path: string;
-    valueName: string;
-    titleName: string;
+    path: string; // JSON path to extract the array
+    valueName: string; // Field in each item used as value
+    titleName: string; // Field in each item used as label
   };
+
   choicesOrder?: "asc" | "desc";
-  placeholder?: string;
-};
 
-export type IFileField = IBaseField & {
+  placeholder?: string;
+}
+
+export interface IFileField extends IBaseField {
   type: "file";
+
   sourceType: "camera" | "file" | "file-camera";
-  tags: Array<string>;
-};
 
-export type ILongTextField = IBaseField & {
+  tags?: string[];
+}
+
+export interface ILongTextField extends IBaseField {
   type: "long_text";
-  placeholder?: string;
-};
 
-export type IMultipleField = IBaseField & {
+  placeholder?: string;
+}
+
+export interface IMultipleField extends IBaseField {
   type: "multiple";
 
-  fields: Array<IField>;
-};
+  fields: IField[];
+}
 
-export type IPhotoField = IBaseField & {
+export interface IPhotoField extends IBaseField {
   type: "photo";
-};
+}
 
-export type ISignaturePadField = IBaseField & {
+export interface ISignaturePadField extends IBaseField {
   type: "signature-pad";
-  placeholder: string;
-};
 
-export type ITextField = IBaseField & {
+  placeholder: string;
+}
+
+export interface ITextField extends IBaseField {
   type: "text";
+
   inputType?: "currency" | "date" | "email" | "month" | "number" | "tel";
-  max?: string;
+
   min?: string;
+
+  max?: string;
+
   placeholder?: string;
-  validators?: Array<{
-    type: "regex";
-    text: string;
-    regex: string;
-  }>;
-};
+}
 
 export type IField =
   | ICheckboxField

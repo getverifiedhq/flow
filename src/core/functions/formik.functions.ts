@@ -38,13 +38,7 @@ export function buildValidationSchema(fields: Array<IField>) {
 
         let schema = Yup.string();
 
-        if (x.isRequired) {
-          schema = schema.required();
-        } else {
-          schema = schema.optional();
-        }
-
-        dict[x.name] = schema;
+        dict[x.name] = buildCustomValidationSchema(schema, x);
 
         return dict;
       }
@@ -52,13 +46,15 @@ export function buildValidationSchema(fields: Array<IField>) {
       if (x.type === "file" || x.type === "multiple" || x.type === "photo") {
         let schema = Yup.array();
 
-        if (x.isRequired) {
-          schema = schema.min(1);
-        } else {
-          schema = schema.min(0);
-        }
+        schema = schema.test("custom", function (value) {
+          if (x.isRequired && (!value || value.length < 1)) {
+            return this.createError({ message: "required" });
+          }
 
-        dict[x.name] = schema;
+          return true;
+        });
+
+        dict[x.name] = buildCustomValidationSchema(schema, x);
 
         return dict;
       }
@@ -66,13 +62,7 @@ export function buildValidationSchema(fields: Array<IField>) {
       if (x.type === "signature-pad") {
         let schema = Yup.string();
 
-        if (x.isRequired) {
-          schema = schema.required();
-        } else {
-          schema = schema.optional();
-        }
-
-        dict[x.name] = schema;
+        dict[x.name] = buildCustomValidationSchema(schema, x);
 
         return dict;
       }
@@ -92,13 +82,7 @@ export function buildValidationSchema(fields: Array<IField>) {
           schema = schema.matches(/^\d*$/);
         }
 
-        if (x.isRequired) {
-          schema = schema.required();
-        } else {
-          schema = schema.optional();
-        }
-
-        dict[x.name] = schema;
+        dict[x.name] = buildCustomValidationSchema(schema, x);
 
         return dict;
       }
@@ -106,4 +90,34 @@ export function buildValidationSchema(fields: Array<IField>) {
       return dict;
     }, {} as { [key: string]: any })
   );
+}
+
+function buildCustomValidationSchema(
+  schema: Yup.Schema,
+  field: IField
+): Yup.Schema {
+  const fns = field.validators
+    ?.filter((validator) => validator.type === "code")
+    .map((validator) => new Function("data", validator.value));
+
+  schema = schema.test("custom", function (value) {
+    if (field.isRequired && !value) {
+      return this.createError({ message: "required" });
+    }
+
+    for (const fn of fns || []) {
+      const result = fn({
+        data: this.options.context,
+        value,
+      });
+
+      if (!result) {
+        return result;
+      }
+    }
+
+    return true;
+  });
+
+  return schema;
 }
