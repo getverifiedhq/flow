@@ -4,6 +4,8 @@ import { IField } from "./field";
 export type ISection = {
   description: string | null;
 
+  enabled: string | boolean;
+
   fields: Array<IField>;
 
   onChange?: (

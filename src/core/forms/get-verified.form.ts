@@ -7,6 +7,7 @@ export const FORM_GET_VERIFIED: IForm = {
   sections: [
     {
       description: null,
+      enabled: true,
       fields: [
         {
           type: "text",
@@ -62,6 +63,7 @@ export const FORM_GET_VERIFIED: IForm = {
     },
     {
       description: null,
+      enabled: true,
       fields: [
         {
           type: "file",
@@ -85,6 +87,7 @@ export const FORM_GET_VERIFIED: IForm = {
     },
     {
       description: "Who should receive your credit report?",
+      enabled: true,
       fields: [
         {
           type: "text",
@@ -111,6 +114,7 @@ export const FORM_GET_VERIFIED: IForm = {
     },
     {
       description: null,
+      enabled: true,
       fields: [
         {
           type: "signature-pad",
