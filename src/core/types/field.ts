@@ -27,9 +27,9 @@ export interface IDropdownField extends IBaseField {
 
   choicesByUrl?: {
     url: string;
-    path: string; // JSON path to extract the array
-    valueName: string; // Field in each item used as value
-    titleName: string; // Field in each item used as label
+    path: string;
+    valueName: string;
+    titleName: string;
   };
 
   choicesOrder?: "asc" | "desc";

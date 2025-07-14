@@ -1,13 +1,13 @@
 export type IRecord = {
   created: number;
 
-  data: { [key: string]: any };
+  data: Record<string, any>;
 
   disabled: boolean;
 
   id: string;
 
-  metadata: { [key: string]: string | undefined };
+  metadata: Record<string, string | undefined>;
 
   payment: {
     transaction: {

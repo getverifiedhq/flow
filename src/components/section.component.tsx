@@ -10,9 +10,9 @@ import {
 import { FieldComponent } from "./field.component";
 
 export function SectionComponent(props: {
-  data: { [key: string]: any };
+  data: Record<string, any>;
   disabled: boolean;
-  onSubmit: (data: { [key: string]: any }) => Promise<void>;
+  onSubmit: (data: Record<string, any>) => Promise<void>;
   section: ISection;
 }) {
   const formik = useFormik({
@@ -31,7 +31,7 @@ export function SectionComponent(props: {
         dict[key] = formik.values[key];
       }
       return dict;
-    }, {} as { [key: string]: any });
+    }, {} as Record<string, any>);
 
     if (Object.keys(obj).length > 0) {
       if (props.section.onChange) {

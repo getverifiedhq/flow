@@ -9,7 +9,7 @@ export type ISection = {
   fields: Array<IField>;
 
   onChange?: (
-    obj: { [key: string]: any },
+    obj: Record<string, any>,
     formik: {
       setFieldValue: (
         field: string,

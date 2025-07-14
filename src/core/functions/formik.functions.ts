@@ -3,7 +3,7 @@ import { IField } from "../types";
 
 export function buildInitialValues(
   fields: Array<IField>,
-  data: { [key: string]: any }
+  data: Record<string, any>
 ) {
   return fields.reduce((dict, x) => {
     if (x.type === "dropdown") {
@@ -21,7 +21,7 @@ export function buildInitialValues(
     }
 
     return dict;
-  }, {} as { [key: string]: any });
+  }, {} as Record<string, any>);
 }
 
 export function buildValidationSchema(fields: Array<IField>) {
@@ -88,7 +88,7 @@ export function buildValidationSchema(fields: Array<IField>) {
       }
 
       return dict;
-    }, {} as { [key: string]: any })
+    }, {} as Record<string, any>)
   );
 }
 

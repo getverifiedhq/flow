@@ -8,16 +8,16 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { IForm } from "../core";
+import { IForm, parseDynamicProperty } from "../core";
 import { SectionComponent } from "./section.component";
 
 export function FormComponent(props: {
-  data: { [key: string]: string };
+  data: Record<string, string>;
   disabled: boolean;
   form: IForm;
-  onSubmit: (data: { [key: string]: string }, submit: boolean) => Promise<void>;
+  onSubmit: (data: Record<string, string>, submit: boolean) => Promise<void>;
 }) {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   return (
     <>
@@ -40,11 +40,18 @@ export function FormComponent(props: {
           sx={{ mb: 6, mt: props.form.title ? 0 : 4 }}
         >
           {props.form.sections.map((section, index: number) => (
-            <Step key={index}>
+            <Step
+              key={index}
+              completed={
+                activeStep > index &&
+                parseDynamicProperty(section.enabled, props.data, "boolean")
+              }
+            >
               <StepLabel
                 optional={section.description || undefined}
                 onClick={() =>
-                  index < activeStep || props.disabled
+                  (index < activeStep || props.disabled) &&
+                  parseDynamicProperty(section.enabled, props.data, "boolean")
                     ? setActiveStep(index)
                     : null
                 }
@@ -66,7 +73,13 @@ export function FormComponent(props: {
                       );
                     }
 
-                    setActiveStep(activeStep + 1);
+                    const nextActiveStep = props.form.sections.findIndex(
+                      (x, index) =>
+                        index > activeStep &&
+                        parseDynamicProperty(x.enabled, props.data, "boolean")
+                    );
+
+                    setActiveStep(nextActiveStep);
                   }}
                   section={section}
                 />

@@ -3,74 +3,47 @@ export function parseDynamicProperty<T>(
   data: any,
   resultType: "string" | "number" | "boolean" | "object"
 ): T {
-  if (typeof value === "string") {
-    let result: string = "";
-
-    let index: number = 0;
-
-    let c: string = "";
-
-    while (index < value.length) {
-      c = value[index];
-
-      if (c === "{" && value[index + 1] === "{") {
-        let buffer: string = "";
-
-        index++;
-        index++;
-
-        while (true) {
-          c = value[index];
-
-          if (c === "}" && value[index + 1] === "}") {
-            index++;
-            index++;
-
-            break;
-          }
-
-          buffer += c;
-
-          index++;
-        }
-
-        result += code(buffer, data);
-
-        continue;
-      }
-
-      result += c;
-
-      index++;
-    }
-
-    return toType(result, resultType);
+  if (typeof value !== "string") {
+    return value as T;
   }
 
-  return value;
+  const interpolated = value.replace(/\{\{(.*?)\}\}/g, (_, expression) => {
+    return safeExecute(expression.trim(), data);
+  });
+
+  return convertType<T>(interpolated, resultType);
 }
 
-export function toType(
+function convertType<T>(
   value: any,
   resultType: "string" | "number" | "boolean" | "object"
-) {
-  if (typeof value === "string") {
-    if (resultType === "string" || resultType === "object") {
-      return value;
-    }
-
-    if (resultType === "number") {
-      return parseFloat(value);
-    }
-
-    if (resultType === "boolean") {
-      return value.toLowerCase() === "true";
-    }
+): T {
+  if (typeof value !== "string") {
+    return value as T;
   }
 
-  return value;
+  switch (resultType) {
+    case "string":
+      return value as unknown as T;
+    case "number":
+      const num = parseFloat(value);
+      return (isNaN(num) ? 0 : num) as unknown as T;
+    case "boolean":
+      return (value.toLowerCase() === "true") as unknown as T;
+    case "object":
+      try {
+        return JSON.parse(value) as T;
+      } catch {
+        return value as unknown as T;
+      }
+  }
 }
 
-export function code(value: string, data: any) {
-  return new Function("data", value)(data);
+function safeExecute(expression: string, data: any): string {
+  try {
+    return new Function("data", `with(data) { return ${expression}; }`)(data);
+  } catch (err) {
+    console.error(`Error evaluating expression: ${expression}`, err);
+    return "";
+  }
 }
