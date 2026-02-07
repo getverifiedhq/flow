@@ -12,7 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@faker-js/faker": "^10.2.0",
+    "@faker-js/faker": "^10.3.0",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/x-date-pickers": "^8.27.0",
