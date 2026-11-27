@@ -24,7 +24,7 @@
     "formik": "^2.4.9",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "react-router-dom": "^7.18.6",
+    "react-router-dom": "^7.18.7",
     "react-signature-canvas": "^1.1.0-alpha.2",
     "sass": "^1.108.2",
     "yup": "^1.7.1"
